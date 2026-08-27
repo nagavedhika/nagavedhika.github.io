@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naga Vedhika B. — AI/ML & Data Science</title>
+  <meta name="description" content="Naga Vedhika B. — AI/ML & Data Science student at Kumaraguru College of Technology. Building intelligent systems from data.">
+
+  <!-- Google Fonts: Syne (Editorial Display Headlines), Plus Jakarta Sans (Crisp Body Text), JetBrains Mono (Serial Tags & Labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Three.js for Global Morphing WebGL Background & 3D Hero Object -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Tailwind CSS CDN with Strict Oryzo Design System Configuration -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            oryzo: {
+              bg: '#100904',          // Warm near-black background (no pure black)
+              surface: '#181008',     // Elevated dark warm surface
+              card: '#1f150d',        // Card background
+              cream: '#F3EDE3',       // Warm cream text (no pure white)
+              muted: '#b8ada1',       // High-contrast readable muted text (passes WCAG AA)
+              dim: '#786e64',         // Subdued helper / serial metadata
+              border: 'rgba(243, 237, 227, 0.12)', // 1px dashed hairline
+              accent: '#e09f58',      // Muted warm amber accent (used sparingly for editorial tags)
+            }
+          },
+          borderRadius: {
+            'pill': '32px',           // Primary CTA radius
+            'btn': '20px',            // Secondary / ghost button radius
+            'card': '12px',           // Card radius
+            'none': '0px'             // Sharp inline tags & links
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ========================================================================
+       ORYZO.AI DESIGN SYSTEM - STRICT SPACING & INTERACTIVE RULES
+       ======================================================================== */
+    :root {
+      --bg: #100904;
+      --cream: #F3EDE3;
+      --accent: #e09f58;
+      --border-dashed: rgba(243, 237, 227, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: #100904;
+      color: #F3EDE3;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Dashed Hairline Dividers */
+    .dashed-divider {
+      border-top: 1px dashed var(--border-dashed);
+    }
+    .dashed-divider-b {
+      border-bottom: 1px dashed var(--border-dashed);
+    }
+    .dashed-divider-l {
+      border-left: 1px dashed var(--border-dashed);
+    }
+    .dashed-divider-r {
+      border-right: 1px dashed var(--border-dashed);
+    }
+
+    /* Typography Specifications */
+    .editorial-headline {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: #F3EDE3;
+    }
+
+    .body-copy {
+      font-size: 1rem; /* 16px desktop minimum */
+      line-height: 1.65;
+      color: #b8ada1; /* High contrast cream-muted */
+      max-width: 65ch; /* Never stretch full width */
+      text-align: left; /* Always left-aligned */
+    }
+
+    @media (max-width: 640px) {
+      .body-copy {
+        font-size: 0.9375rem; /* 15px mobile minimum */
+      }
+    }
+
+    .editorial-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; /* 12px */
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .serial-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #786e64;
+      letter-spacing: 0.08em;
+    }
+
+    /* Persistent Right-Edge Vertical Label */
+    .vertical-brand-tag {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.25em;
+    }
+
+    /* Custom Fluid Cursor (Desktop) */
+    @media (pointer: fine) {
+      body { cursor: default; }
+      .cursor-dot, .cursor-ring {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease;
+      }
+      .cursor-dot {
+        width: 6px;
+        height: 6px;
+        background-color: var(--accent);
+      }
+      .cursor-ring {
+        width: 32px;
+        height: 32px;
+        border: 1px solid rgba(243, 237, 227, 0.25);
+        transition: transform 0.12s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      }
+      .cursor-hovered .cursor-ring {
+        width: 50px;
+        height: 50px;
+        border-color: var(--accent);
+        background-color: rgba(224, 159, 88, 0.08);
+      }
+    }
+
+    /* Magnetic Interactive Elements */
+    .magnetic-element {
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* 3D Tilt Card Container */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+    }
+    .tilt-card:hover {
+      border-color: rgba(224, 159, 88, 0.35);
+    }
+
+    /* Subtle Marquee Animation */
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marqueeScroll 30s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Noise Texture Overlay */
+    .noise-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #100904; }
+    ::-webkit-scrollbar-thumb { background: #2a1f16; border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: #e09f58; }
+
+    /* Scroll reveal transitions */
+    .reveal-block {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-block.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background: rgba(10, 6, 3, 0.9);
+      backdrop-filter: blur(20px);
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .cursor-dot, .cursor-ring { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-oryzo-bg text-oryzo-cream selection:bg-oryzo-accent selection:text-oryzo-bg overflow-x-hidden relative">
+
+  <!-- Grain / Noise Layer -->
+  <div class="noise-layer"></div>
+
+  <!-- Persistent Global Living WebGL / Canvas Background (Runs continuously across all sections) -->
+  <canvas id="global-webgl-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-50"></canvas>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden md:block" id="cursor-dot"></div>
+  <div class="cursor-ring hidden md:block" id="cursor-ring"></div>
+
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-bar" class="fixed top-0 left-0 h-[2px] bg-oryzo-accent z-50 transition-all duration-75 pointer-events-none" style="width: 0%;"></div>
+
+  <!-- Persistent Right-Edge Vertical Serial Label (oryzo.ai signature craft) -->
+  <aside class="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-30 hidden lg:flex items-center gap-3 pointer-events-none opacity-45 hover:opacity-100 transition-opacity">
+    <div class="w-px h-12 bg-[rgba(243,237,227,0.12)]"></div>
+    <span class="vertical-brand-tag font-mono text-[9px] text-oryzo-muted uppercase">
+      NAGA VEDHIKA B. — AI/ML × DATA SCIENCE — 2026 // LAB.KCT
+    </span>
+    <div class="w-px h-12 bg-[rgba(243,237,227,0.12)]"></div>
+  </aside>
+
+
+  <!-- ================= MINIMAL EDITORIAL NAVIGATION ================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 px-6 sm:px-12 py-6 bg-oryzo-bg/90 backdrop-blur-md dashed-divider-b">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Serial Mark -->
+      <a href="#hero" class="flex items-center gap-3 group magnetic-element" aria-label="Go to Top">
+        <span class="font-mono text-xs text-oryzo-accent font-bold tracking-wider">[NV.01]</span>
+        <span class="font-mono text-xs text-oryzo-cream tracking-widest uppercase group-hover:text-oryzo-accent transition-colors font-medium">
+          NAGA VEDHIKA B.
+        </span>
+      </a>
+
+      <!-- Right-Aligned Minimal Navigation with Active Underline -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-mono tracking-widest text-oryzo-muted uppercase font-medium">
+        <a href="#manifesto" class="hover:text-oryzo-cream transition-colors py-1 nav-link">01.MANIFESTO</a>
+        <a href="#projects" class="hover:text-oryzo-cream transition-colors py-1 nav-link">02.WORK</a>
+        <a href="#skills" class="hover:text-oryzo-cream transition-colors py-1 nav-link">03.STACK</a>
+        <a href="#experience" class="hover:text-oryzo-cream transition-colors py-1 nav-link">04.TIMELINE</a>
+        <a href="#about" class="hover:text-oryzo-cream transition-colors py-1 nav-link">05.ABOUT</a>
+        <a href="#contact" class="hover:text-oryzo-cream transition-colors py-1 nav-link">06.CONNECT</a>
+      </nav>
+
+      <!-- Action Button Group -->
+      <div class="flex items-center gap-4">
+        <a href="resume.html" target="_blank" class="hidden sm:inline-block px-5 py-2 rounded-btn text-xs font-mono text-oryzo-muted hover:text-oryzo-cream border border-dashed border-[rgba(243,237,227,0.15)] hover:border-oryzo-accent/50 transition-all font-medium magnetic-element">
+          RESUME ↗
+        </a>
+        <a href="#contact" class="px-6 py-2.5 rounded-pill text-xs font-mono font-semibold tracking-wider text-oryzo-bg bg-oryzo-cream hover:bg-oryzo-accent transition-all shadow-md magnetic-element">
+          GET IN TOUCH
+        </a>
+        <button id="mobile-toggle" class="md:hidden w-9 h-9 flex items-center justify-center text-oryzo-cream border border-dashed border-[rgba(243,237,227,0.15)]" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars-staggered text-sm"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="fixed inset-0 z-50 bg-oryzo-bg/98 backdrop-blur-xl hidden flex flex-col justify-between p-8 sm:p-12">
+    <div class="flex items-center justify-between pb-6 dashed-divider-b">
+      <span class="font-mono text-xs text-oryzo-accent">[NV.01] NAGA VEDHIKA B.</span>
+      <button id="mobile-close" class="w-9 h-9 flex items-center justify-center text-oryzo-cream border border-dashed border-[rgba(243,237,227,0.15)]">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="flex flex-col gap-7 text-2xl font-display font-bold text-oryzo-cream uppercase tracking-tight">
+      <a href="#manifesto" class="mobile-link hover:text-oryzo-accent transition-colors">01. Manifesto</a>
+      <a href="#projects" class="mobile-link hover:text-oryzo-accent transition-colors">02. Selected Work</a>
+      <a href="#skills" class="mobile-link hover:text-oryzo-accent transition-colors">03. Tech Stack</a>
+      <a href="#experience" class="mobile-link hover:text-oryzo-accent transition-colors">04. Timeline</a>
+      <a href="#about" class="mobile-link hover:text-oryzo-accent transition-colors">05. About Identity</a>
+      <a href="#contact" class="mobile-link hover:text-oryzo-accent transition-colors">06. Connect</a>
+    </div>
+    <div class="pt-6 dashed-divider flex items-center justify-between text-xs font-mono text-oryzo-muted">
+      <a href="resume.html" target="_blank" class="text-oryzo-cream hover:text-oryzo-accent font-medium">ATS Printable Resume ↗</a>
+      <span>Kumaraguru Tech • 2028</span>
+    </div>
+  </div>
+
+
+  <!-- ================= MAIN SEQUENTIAL VIEWPORT SECTIONS ================= -->
+  <main class="relative z-10">
+
+    <!-- ================= 1. HERO SECTION (100vh Full Viewport) ================= -->
+    <section id="hero" class="min-h-screen relative flex flex-col justify-between px-6 sm:px-12 lg:px-20 pt-36 pb-12 max-w-7xl mx-auto">
+      
+      <!-- Top Serial Meta -->
+      <div class="relative z-10 flex items-center justify-between text-xs font-mono text-oryzo-muted">
+        <div class="flex items-center gap-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-oryzo-accent animate-ping"></span>
+          <span class="text-oryzo-accent font-semibold">STATUS: RESEARCH & BUILD</span>
+        </div>
+        <span class="hidden sm:inline tracking-widest text-[11px] font-medium">
+          CSE (AI/ML & DATA SCIENCE) • KCT
+        </span>
+      </div>
+
+      <!-- Center Large Typography Headline -->
+      <div class="relative z-10 my-auto py-8 max-w-4xl space-y-6">
+        <span class="editorial-label block">RESEARCH PERSPECTIVE // 01</span>
+        
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl editorial-headline">
+          Naga Vedhika B. — <br>
+          <span class="text-oryzo-muted font-normal">Building</span> intelligent systems <br>
+          <span class="italic text-oryzo-accent font-light">from data.</span>
+        </h1>
+
+        <p class="body-copy">
+          Computer Science Engineering student at Kumaraguru College of Technology. Exploring predictive clinical models, intelligent conversational architectures, and practical algorithms.
+        </p>
+
+        <!-- Interactive CTAs adhering strictly to radius vocabulary -->
+        <div class="pt-6 flex flex-wrap items-center gap-4">
+          <a href="#projects" class="px-8 py-3.5 rounded-pill text-xs font-mono font-semibold tracking-wider text-oryzo-bg bg-oryzo-cream hover:bg-oryzo-accent transition-all shadow-lg hover:scale-105 magnetic-element">
+            SEE PROJECTS ↓
+          </a>
+          <a href="#manifesto" class="px-7 py-3.5 rounded-btn text-xs font-mono font-medium tracking-wider text-oryzo-cream border border-dashed border-[rgba(243,237,227,0.15)] hover:border-oryzo-accent/60 transition-colors magnetic-element">
+            READ MANIFESTO
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom Serial Metadata -->
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 pt-6 dashed-divider text-xs font-mono text-oryzo-dim">
+        <div>
+          <span class="text-oryzo-muted block font-medium">PRIMARY OBJECTIVE</span>
+          <span>Deploying AI that solves real-world human problems</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span>SCROLL TO DISCOVER</span>
+          <div class="w-px h-8 bg-[rgba(243,237,227,0.2)] animate-pulse"></div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ================= 2. MANIFESTO / PHILOSOPHY (100vh Full Viewport) ================= -->
+    <section id="manifesto" class="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto dashed-divider">
+      
+      <div class="max-w-4xl space-y-10 reveal-block">
+        <div class="flex items-center gap-3">
+          <span class="editorial-label">02 // INTRO & MANIFESTO</span>
+          <div class="w-12 h-px bg-[rgba(243,237,227,0.12)]"></div>
+        </div>
+
+        <blockquote class="text-3xl sm:text-5xl lg:text-6xl editorial-headline leading-[1.18]">
+          "Artificial intelligence shouldn't be an abstract monument. It is most powerful when it quietly, reliably solves a human need."
+        </blockquote>
+
+        <!-- 2-Column Max Layout (Never 3+ columns for anti-clutter) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+          <p class="body-copy">
+            I am a student currently learning and experimenting with machine learning pipelines, relational database structures, and applied AI systems. I don't believe in vanity metrics or superficial complexity.
+          </p>
+          <p class="body-copy">
+            My work focuses on the intersection of structured data, clinical predictive models, and intuitive full-stack interfaces — converting raw computational potential into software people can genuinely trust.
+          </p>
+        </div>
+
+        <div class="pt-4 flex items-center gap-6 text-xs font-mono text-oryzo-dim">
+          <span>[LOCATION: SALEM, TN]</span>
+          <span>•</span>
+          <span>[STATUS: ACTIVE LEARNER]</span>
+          <span>•</span>
+          <span>[FOCUS: AI/ML × DATA]</span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ================= 3. FEATURED PROJECTS (One Project per 100vh Screen) ================= -->
+    <section id="projects" class="dashed-divider">
+      
+      <!-- Section Header Intro Step -->
+      <div class="min-h-[45vh] flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-24 max-w-7xl mx-auto">
+        <span class="editorial-label mb-3">03 // SELECTED CASE STUDIES</span>
+        <h2 class="text-3xl sm:text-5xl editorial-headline">
+          Featured Engineering Work.
+        </h2>
+        <p class="text-xs sm:text-sm font-mono text-oryzo-muted mt-2 font-medium">
+          ONE IDEA PER SCREEN • PROGRESSIVELY REVEALED • INTERACTIVE CASE STUDIES
+        </p>
+      </div>
+
+      <!-- PROJECT 01: AI Healthcare Treatment Response (Full-Viewport Screen) -->
+      <article class="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto dashed-divider" id="project-01">
+        <!-- 2-Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center reveal-block">
+          
+          <!-- Content Left (6 cols) -->
+          <div class="lg:col-span-6 space-y-6">
+            <div class="flex items-center gap-3">
+              <span class="serial-number">PROJECT // 01</span>
+              <span class="w-px h-3 bg-[rgba(243,237,227,0.12)]"></span>
+              <span class="editorial-label">HEALTHCARE AI & PREDICTIVE ML</span>
+            </div>
+
+            <h3 class="text-3xl sm:text-5xl editorial-headline leading-tight">
+              AI Healthcare Treatment Response Recommendation
+            </h3>
+
+            <p class="body-copy">
+              A predictive machine learning system designed to evaluate clinical biomarkers, physiological patient indicators, and medical histories to forecast individualized treatment response efficacy.
+            </p>
+
+            <!-- Interactive Problem / Approach Breakdown -->
+            <div class="space-y-3 pt-2 text-xs font-light">
+              <div class="p-4 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-1 hover:border-oryzo-accent/40 transition-colors">
+                <span class="font-mono text-[10px] text-oryzo-accent uppercase tracking-wider block font-semibold">THE PROBLEM</span>
+                <p class="text-oryzo-muted leading-relaxed">Clinical efficacy varies widely across patient cohorts. Doctors require reliable, data-grounded probability assessments to assist rapid decision-making.</p>
+              </div>
+              <div class="p-4 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-1 hover:border-oryzo-accent/40 transition-colors">
+                <span class="font-mono text-[10px] text-oryzo-accent uppercase tracking-wider block font-semibold">THE APPROACH</span>
+                <p class="text-oryzo-muted leading-relaxed">Constructed a modular Python ML pipeline with feature normalization, correlation modeling, and classification tuning for predictive clinical output.</p>
+              </div>
+            </div>
+
+            <!-- Tech Stack Tags (Sharp 0px inline tags) -->
+            <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono text-oryzo-muted">
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">Python</span>
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">Scikit-Learn</span>
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">Supervised ML</span>
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">Data Preprocessing</span>
+            </div>
+
+            <!-- Interactive Actions: Case Study Modal & GitHub -->
+            <div class="pt-4 flex flex-wrap items-center gap-4">
+              <button onclick="openDeepDive('ai-healthcare')" class="px-6 py-2.5 rounded-btn text-xs font-mono font-semibold text-oryzo-bg bg-oryzo-cream hover:bg-oryzo-accent transition-all shadow-md magnetic-element flex items-center gap-2">
+                <i class="fa-solid fa-book-open text-[10px]"></i>
+                <span>OPEN FULL CASE STUDY</span>
+              </button>
+              <a href="https://github.com/nagavedhika" target="_blank" class="px-5 py-2.5 rounded-btn text-xs font-mono font-medium text-oryzo-muted hover:text-oryzo-cream border border-dashed border-[rgba(243,237,227,0.15)] transition-all magnetic-element">
+                SOURCE ↗
+              </a>
+              <span class="text-xs font-mono text-oryzo-dim">STATUS: BUILT</span>
+            </div>
+          </div>
+
+          <!-- Interactive 3D Tilt Visual Right (6 cols) -->
+          <div class="lg:col-span-6">
+            <div class="tilt-card relative aspect-[4/3] rounded-card overflow-hidden border border-dashed border-[rgba(243,237,227,0.12)] bg-oryzo-surface group shadow-2xl cursor-pointer" onclick="openDeepDive('ai-healthcare')">
+              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&auto=format&fit=crop&q=80" alt="Healthcare AI Model Architecture" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-oryzo-bg via-transparent to-transparent flex items-end p-6">
+                <div class="flex items-center justify-between w-full text-xs font-mono text-oryzo-muted">
+                  <span>CLINICAL FEATURE EXTRACTION</span>
+                  <span class="text-oryzo-accent font-semibold group-hover:underline">EXPAND CASE STUDY ↗</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+
+      <!-- PROJECT 02: Full-Stack Web App with AI Chatbot (Full-Viewport Screen) -->
+      <article class="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto dashed-divider" id="project-02">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center reveal-block">
+          
+          <!-- Content Left (6 cols) -->
+          <div class="lg:col-span-6 space-y-6">
+            <div class="flex items-center gap-3">
+              <span class="serial-number">PROJECT // 02</span>
+              <span class="w-px h-3 bg-[rgba(243,237,227,0.12)]"></span>
+              <span class="editorial-label">FULL-STACK & CONVERSATIONAL AI</span>
+            </div>
+
+            <h3 class="text-3xl sm:text-5xl editorial-headline leading-tight">
+              Full-Stack Web Application with AI Chatbot Integration
+            </h3>
+
+            <p class="body-copy">
+              An end-to-end full-stack web application featuring secure user authentication, menu catalog management, relational MySQL order transactions, and an embedded AI conversational assistant for live recommendations and instant FAQ resolution.
+            </p>
+
+            <!-- Interactive Problem / Approach Breakdown -->
+            <div class="space-y-3 pt-2 text-xs font-light">
+              <div class="p-4 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-1 hover:border-oryzo-accent/40 transition-colors">
+                <span class="font-mono text-[10px] text-oryzo-accent uppercase tracking-wider block font-semibold">THE PROBLEM</span>
+                <p class="text-oryzo-muted leading-relaxed">Digital catalog applications need synchronized relational data integrity, user session security, and dynamic customer assistance without clunky navigation.</p>
+              </div>
+              <div class="p-4 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-1 hover:border-oryzo-accent/40 transition-colors">
+                <span class="font-mono text-[10px] text-oryzo-accent uppercase tracking-wider block font-semibold">THE APPROACH</span>
+                <p class="text-oryzo-muted leading-relaxed">Engineered relational MySQL schema constraints for transactional order handling and built a conversational chatbot layer to guide user queries dynamically.</p>
+              </div>
+            </div>
+
+            <!-- Tech Stack Tags -->
+            <div class="pt-2 flex flex-wrap gap-2 text-xs font-mono text-oryzo-muted">
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">Full-Stack</span>
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">Conversational AI</span>
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">MySQL Relational</span>
+              <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] hover:text-oryzo-cream hover:border-oryzo-accent/50 transition-colors">User Auth</span>
+            </div>
+
+            <!-- Interactive Actions -->
+            <div class="pt-4 flex flex-wrap items-center gap-4">
+              <button onclick="openDeepDive('fullstack-ai')" class="px-6 py-2.5 rounded-btn text-xs font-mono font-semibold text-oryzo-bg bg-oryzo-cream hover:bg-oryzo-accent transition-all shadow-md magnetic-element flex items-center gap-2">
+                <i class="fa-solid fa-book-open text-[10px]"></i>
+                <span>OPEN FULL CASE STUDY</span>
+              </button>
+              <a href="https://github.com/nagavedhika" target="_blank" class="px-5 py-2.5 rounded-btn text-xs font-mono font-medium text-oryzo-muted hover:text-oryzo-cream border border-dashed border-[rgba(243,237,227,0.15)] transition-all magnetic-element">
+                SOURCE ↗
+              </a>
+              <span class="text-xs font-mono text-oryzo-dim">STATUS: BUILT</span>
+            </div>
+          </div>
+
+          <!-- Interactive 3D Tilt Visual Right (6 cols) -->
+          <div class="lg:col-span-6">
+            <div class="tilt-card relative aspect-[4/3] rounded-card overflow-hidden border border-dashed border-[rgba(243,237,227,0.12)] bg-oryzo-surface group shadow-2xl cursor-pointer" onclick="openDeepDive('fullstack-ai')">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80" alt="Full-Stack Web App Dashboard" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-oryzo-bg via-transparent to-transparent flex items-end p-6">
+                <div class="flex items-center justify-between w-full text-xs font-mono text-oryzo-muted">
+                  <span>RELATIONAL CATALOG & ASSISTANT</span>
+                  <span class="text-oryzo-accent font-semibold group-hover:underline">EXPAND CASE STUDY ↗</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+    </section>
+
+
+    <!-- ================= 4. SKILLS / TECH STACK SECTION (100vh Full Viewport) ================= -->
+    <section id="skills" class="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto dashed-divider">
+      
+      <div class="space-y-12 reveal-block">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="editorial-label">04 // TECH STACK & COMPETENCIES</span>
+            <h2 class="text-3xl sm:text-5xl editorial-headline mt-2">
+              Systematic Knowledge.
+            </h2>
+          </div>
+          <span class="hidden sm:inline font-mono text-xs text-oryzo-dim">INTERACTIVE TAXONOMY • CLICK TO INSPECT</span>
+        </div>
+
+        <!-- 2-Column Desktop Layout (Max 2 columns for clean, uncrowded readability) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+          
+          <!-- Category 1: Languages & Systems -->
+          <div class="p-8 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-4">
+            <span class="serial-number">01 / PROGRAMMING LANGUAGES</span>
+            <h3 class="text-xl font-display font-bold text-oryzo-cream">Core Languages & Logic</h3>
+            <ul class="space-y-2.5 text-xs font-mono text-oryzo-muted pt-2">
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Python', 'Primary language for ML modeling, data science scripts, and algorithm implementation.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Python</span> 
+                <span class="text-oryzo-accent">Data & ML Core ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Java', 'Object-oriented programming, data structures, and modular software engineering.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Java</span> 
+                <span class="text-oryzo-muted">OOP Design ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('C / C++', 'Algorithmic problem solving, pointers, time-space efficiency, and memory structures.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">C / C++</span> 
+                <span class="text-oryzo-muted">DSA Core ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('SQL', 'Relational database querying, joins, subqueries, grouping, and schema design in MySQL.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">SQL (MySQL)</span> 
+                <span class="text-oryzo-accent">Relational Queries ℹ️</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 2: Machine Intelligence & Data -->
+          <div class="p-8 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-4">
+            <span class="serial-number">02 / MACHINE INTELLIGENCE</span>
+            <h3 class="text-xl font-display font-bold text-oryzo-cream">AI / ML & Data Science</h3>
+            <ul class="space-y-2.5 text-xs font-mono text-oryzo-muted pt-2">
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Machine Learning', 'Supervised and unsupervised learning pipelines, regression, classification, and evaluation metrics.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Machine Learning</span> 
+                <span class="text-oryzo-accent">Scikit-Learn ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Data Analytics', 'Exploratory data analysis (EDA), statistical distributions, and dataset preprocessing.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Data Analytics</span> 
+                <span class="text-oryzo-muted">Exploratory EDA ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Conversational AI', 'Integrating interactive chatbot interfaces for menu recommendation and customer support.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Conversational AI</span> 
+                <span class="text-oryzo-accent">Chatbot Assistance ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Predictive Modeling', 'Formulating statistical clinical feature sets to predict treatment efficacy in healthcare datasets.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Predictive Modeling</span> 
+                <span class="text-oryzo-accent">Healthcare ML ℹ️</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 3: Architecture & 3D -->
+          <div class="p-8 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-4">
+            <span class="serial-number">03 / ARCHITECTURE & WEB</span>
+            <h3 class="text-xl font-display font-bold text-oryzo-cream">Database & Web Engineering</h3>
+            <ul class="space-y-2.5 text-xs font-mono text-oryzo-muted pt-2">
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('MySQL Architecture', 'Infosys Springboard certified in relational database systems, ACID properties, and query optimization.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">MySQL Architecture</span> 
+                <span class="text-oryzo-accent">Infosys Cert (1 & 2) ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('DBMS Normalization', 'Designing normalized 1NF to 3NF relational schemas to minimize redundancy and maintain integrity.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">DBMS Normalization</span> 
+                <span class="text-oryzo-muted">3NF Relational ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('HTML5 & CSS3', 'Semantic markup, accessibility, modern styling, and responsive layout foundations.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">HTML5 & CSS3</span> 
+                <span class="text-oryzo-muted">Semantic UI ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Blender 3D', '3D mesh modeling, materials, shaders, and spatial rendering fundamentals.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Blender 3D</span> 
+                <span class="text-oryzo-muted">Geometry Modeling ℹ️</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 4: Professional Execution -->
+          <div class="p-8 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-4">
+            <span class="serial-number">04 / PRACTICE</span>
+            <h3 class="text-xl font-display font-bold text-oryzo-cream">Professional Execution</h3>
+            <ul class="space-y-2.5 text-xs font-mono text-oryzo-muted pt-2">
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Technical Communication', 'Writing clear technical specifications, case study documentation, and code explanations.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Technical Communication</span> 
+                <span class="text-oryzo-accent">Documentation ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Collaborative Teamwork', 'Pair programming, modular division of responsibilities, and agile team alignment.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Collaborative Teamwork</span> 
+                <span class="text-oryzo-muted">Peer Sprints ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 dashed-divider-b hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Problem Decomposition', 'Breaking ambiguous challenges into testable mathematical and software modules.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Problem Decomposition</span> 
+                <span class="text-oryzo-accent">Structured Logic ℹ️</span>
+              </li>
+              <li class="flex items-center justify-between py-2 hover:text-oryzo-cream transition-colors cursor-pointer group" onclick="showSkillHighlight('Project Presentations', 'Presenting system architectures, model evaluations, and live functional demos.')">
+                <span class="font-medium text-oryzo-cream group-hover:text-oryzo-accent transition-colors">Project Presentations</span> 
+                <span class="text-oryzo-muted">Architecture Demos ℹ️</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Interactive Skill Context Banner -->
+        <div id="skill-context-box" class="p-4 rounded-card bg-oryzo-surface border border-dashed border-oryzo-accent/30 text-xs font-mono text-oryzo-muted flex items-center justify-between gap-4">
+          <div>
+            <span class="text-oryzo-accent font-semibold" id="skill-context-title">💡 CLICK ANY SKILL ABOVE</span>: 
+            <span id="skill-context-desc">Select any item to inspect its real-world implementation in my engineering workflow.</span>
+          </div>
+          <span class="text-oryzo-dim hidden sm:inline">[LIVE TAXONOMY]</span>
+        </div>
+
+        <!-- Slow Horizontal Editorial Marquee -->
+        <div class="pt-4 overflow-hidden dashed-divider">
+          <div class="animate-marquee py-3 text-xs font-mono tracking-widest text-oryzo-dim uppercase">
+            <span class="mx-6">PYTHON</span> • <span class="mx-6 text-oryzo-cream">SCIKIT-LEARN</span> • <span class="mx-6">MACHINE LEARNING</span> • <span class="mx-6 text-oryzo-accent">HEALTHCARE AI</span> • <span class="mx-6">MYSQL DBMS</span> • <span class="mx-6 text-oryzo-cream">CONVERSATIONAL AGENTS</span> • <span class="mx-6">JAVA</span> • <span class="mx-6">DATA STRUCTURES</span> • <span class="mx-6 text-oryzo-accent">GOOGLE DEV INTERNSHIP</span> • <span class="mx-6">BLENDER 3D</span> •
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ================= 5. TIMELINE / EXPERIENCE (100vh Full Viewport) ================= -->
+    <section id="experience" class="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto dashed-divider">
+      
+      <div class="space-y-12 reveal-block">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="editorial-label">05 // CHRONOLOGY & RECORD</span>
+            <h2 class="text-3xl sm:text-5xl editorial-headline mt-2">
+              Experience & Credentials.
+            </h2>
+          </div>
+          <span class="hidden sm:inline font-mono text-xs text-oryzo-dim">CLICK ANY ENTRY TO EXPAND DETAILS</span>
+        </div>
+
+        <!-- Vertical Timeline Rows with Interactive Expandable Detail -->
+        <div class="space-y-0 dashed-divider-l ml-2 sm:ml-4 pl-6 sm:pl-8">
+          
+          <!-- Entry 1: Google Virtual Internship -->
+          <div class="relative py-6 dashed-divider-b space-y-2 cursor-pointer group" onclick="toggleTimelineDetail('tl-01')">
+            <span class="absolute -left-[31px] sm:-left-[39px] top-7 w-3 h-3 rounded-full bg-oryzo-accent border-2 border-oryzo-bg group-hover:scale-125 transition-transform"></span>
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <h3 class="text-lg sm:text-xl font-display font-bold text-oryzo-cream group-hover:text-oryzo-accent transition-colors flex items-center gap-2">
+                AI-ML Virtual Internship Program <span class="text-xs text-oryzo-dim font-mono font-normal">[Click to Expand]</span>
+              </h3>
+              <span class="font-mono text-xs text-oryzo-accent font-medium">EduSkills, AICTE & Google for Developers</span>
+            </div>
+            <p class="body-copy text-sm">
+              Completed structured training in Machine Learning algorithms, predictive modeling, and data pipelines utilizing Google developer technologies and data science best practices.
+            </p>
+            <div id="tl-01" class="hidden pt-3 text-xs font-mono text-oryzo-muted space-y-1">
+              <div class="text-oryzo-cream font-semibold">Key Highlights:</div>
+              <div>• Implemented supervised classification and regression pipelines using Python.</div>
+              <div>• Explored data preprocessing and feature scaling on multi-variable datasets.</div>
+              <div>• Certificate awarded jointly by EduSkills, AICTE, and Google for Developers.</div>
+            </div>
+          </div>
+
+          <!-- Entry 2: Infosys DBMS -->
+          <div class="relative py-6 dashed-divider-b space-y-2 cursor-pointer group" onclick="toggleTimelineDetail('tl-02')">
+            <span class="absolute -left-[31px] sm:-left-[39px] top-7 w-3 h-3 rounded-full bg-[rgba(243,237,227,0.3)] border-2 border-oryzo-bg group-hover:scale-125 transition-transform"></span>
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <h3 class="text-lg sm:text-xl font-display font-bold text-oryzo-cream group-hover:text-oryzo-accent transition-colors flex items-center gap-2">
+                Database Management System (Part 1 & 2) <span class="text-xs text-oryzo-dim font-mono font-normal">[Click to Expand]</span>
+              </h3>
+              <span class="font-mono text-xs text-oryzo-muted font-medium">Infosys Springboard Certification</span>
+            </div>
+            <p class="body-copy text-sm">
+              Certified in relational schema architecture, advanced SQL joins, transaction management, indexing, and normalization (1NF through 3NF).
+            </p>
+            <div id="tl-02" class="hidden pt-3 text-xs font-mono text-oryzo-muted space-y-1">
+              <div class="text-oryzo-cream font-semibold">Key Highlights:</div>
+              <div>• Mastered relational algebra, ACID transaction boundaries, and indexing strategies.</div>
+              <div>• Structured normalized 3NF relational schemas for high transaction consistency.</div>
+            </div>
+          </div>
+
+          <!-- Entry 3: Blender 3D -->
+          <div class="relative py-6 dashed-divider-b space-y-2 cursor-pointer group" onclick="toggleTimelineDetail('tl-03')">
+            <span class="absolute -left-[31px] sm:-left-[39px] top-7 w-3 h-3 rounded-full bg-[rgba(243,237,227,0.3)] border-2 border-oryzo-bg group-hover:scale-125 transition-transform"></span>
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <h3 class="text-lg sm:text-xl font-display font-bold text-oryzo-cream group-hover:text-oryzo-accent transition-colors flex items-center gap-2">
+                Foundation of 3D Modelling in Blender <span class="text-xs text-oryzo-dim font-mono font-normal">[Click to Expand]</span>
+              </h3>
+              <span class="font-mono text-xs text-oryzo-muted font-medium">3D Asset & Graphics Track</span>
+            </div>
+            <p class="body-copy text-sm">
+              Completed practical coursework in 3D polygonal geometry modeling, materials, and spatial digital rendering.
+            </p>
+            <div id="tl-03" class="hidden pt-3 text-xs font-mono text-oryzo-muted space-y-1">
+              <div class="text-oryzo-cream font-semibold">Key Highlights:</div>
+              <div>• Built low-poly assets, materials, and lighting setups in Blender.</div>
+              <div>• Cultivated visual spatial awareness applicable to creative UI/3D web design.</div>
+            </div>
+          </div>
+
+          <!-- Entry 4: Degree at KCT -->
+          <div class="relative py-6 space-y-2 cursor-pointer group" onclick="toggleTimelineDetail('tl-04')">
+            <span class="absolute -left-[31px] sm:-left-[39px] top-7 w-3 h-3 rounded-full bg-[rgba(243,237,227,0.3)] border-2 border-oryzo-bg group-hover:scale-125 transition-transform"></span>
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+              <h3 class="text-lg sm:text-xl font-display font-bold text-oryzo-cream group-hover:text-oryzo-accent transition-colors flex items-center gap-2">
+                B.E. Computer Science and Engineering <span class="text-xs text-oryzo-dim font-mono font-normal">[Click to Expand]</span>
+              </h3>
+              <span class="font-mono text-xs text-oryzo-accent font-medium">Kumaraguru College of Technology (2025–2028)</span>
+            </div>
+            <p class="body-copy text-sm">
+              Current 3rd Year / Semester V student. Cumulative Grade Point Average: <strong class="text-oryzo-cream font-mono">7.8 / 10.0</strong>. Specializing in Artificial Intelligence, Machine Learning, and Data Science.
+            </p>
+            <div id="tl-04" class="hidden pt-3 text-xs font-mono text-oryzo-muted space-y-1">
+              <div class="text-oryzo-cream font-semibold">Academic Coursework:</div>
+              <div>• Design & Analysis of Algorithms, Object-Oriented Programming (OOP), Relational DBMS.</div>
+              <div>• Discrete Mathematics, Operating Systems, Machine Learning Foundations.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ================= 6. ABOUT SECTION (100vh Full Viewport) ================= -->
+    <section id="about" class="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto dashed-divider">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center reveal-block">
+        
+        <!-- Text Left (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <span class="editorial-label">06 // HUMAN DIMENSION</span>
+          
+          <h2 class="text-3xl sm:text-5xl editorial-headline leading-tight">
+            Curious, deliberate, <br>
+            <span class="text-oryzo-muted font-normal">and always building.</span>
+          </h2>
+
+          <div class="space-y-4">
+            <p class="body-copy">
+              I am Naga Vedhika B., a Computer Science student located in Salem, Tamil Nadu, studying at Kumaraguru College of Technology.
+            </p>
+            <p class="body-copy">
+              Beyond technical coursework and algorithmic pipelines, I find balance in tactile and creative hobbies. I enjoy <strong class="text-oryzo-cream font-medium">crochet and fiber art</strong> 🧶 — where patient, repetitive geometric loops mirror the iterative nature of software engineering — as well as <strong class="text-oryzo-cream font-medium">reading fiction and technology literature</strong> 📚.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4 pt-4 dashed-divider">
+            <div>
+              <span class="serial-number">COLLEGE</span>
+              <div class="text-xs font-mono text-oryzo-cream font-semibold mt-1">KCT Coimbatore</div>
+            </div>
+            <div>
+              <span class="serial-number">CURRENT CGPA</span>
+              <div class="text-xs font-mono text-oryzo-accent font-semibold mt-1">7.8 / 10.0</div>
+            </div>
+            <div>
+              <span class="serial-number">GRADUATION</span>
+              <div class="text-xs font-mono text-oryzo-cream font-semibold mt-1">Class of 2028</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Abstract Avatar / Interactive Identity Card Right (5 cols) -->
+        <div class="lg:col-span-5">
+          <div class="tilt-card p-8 rounded-card bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.12)] space-y-6 shadow-2xl">
+            <div class="flex items-center justify-between text-xs font-mono text-oryzo-dim">
+              <span>[IDENTITY MATRIX]</span>
+              <span>NV.2026</span>
+            </div>
+            <div class="w-16 h-16 rounded-btn bg-oryzo-card border border-dashed border-oryzo-accent/40 flex items-center justify-center font-display font-bold text-2xl text-oryzo-accent">
+              NV
+            </div>
+            <div class="space-y-2 text-xs font-mono text-oryzo-muted">
+              <div><span class="text-oryzo-dim">NAME:</span> Naga Vedhika B.</div>
+              <div><span class="text-oryzo-dim">ROLE:</span> AI/ML & Data Science Student</div>
+              <div><span class="text-oryzo-dim">INTERESTS:</span> Healthcare AI, Chatbots, Crochet 🧶, Reading 📚</div>
+              <div><span class="text-oryzo-dim">LOCATION:</span> Salem, Tamil Nadu, India</div>
+            </div>
+            <div class="pt-4 dashed-divider">
+              <a href="resume.html" target="_blank" class="text-xs font-mono text-oryzo-accent hover:text-oryzo-cream transition-colors flex items-center gap-2 font-medium">
+                <span>ACCESS FULL ATS RESUME</span> →
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= 7. CONTACT / FOOTER SECTION (100vh Full Viewport) ================= -->
+    <section id="contact" class="min-h-screen flex flex-col justify-between px-6 sm:px-12 lg:px-20 pt-28 pb-12 max-w-7xl mx-auto dashed-divider">
+      
+      <!-- Top Label -->
+      <div class="flex items-center gap-3">
+        <span class="editorial-label">07 // INITIATION</span>
+        <div class="w-12 h-px bg-[rgba(243,237,227,0.12)]"></div>
+      </div>
+
+      <!-- Center Big Closing Headline -->
+      <div class="my-auto py-12 space-y-8 max-w-4xl reveal-block">
+        <h2 class="text-4xl sm:text-6xl lg:text-7xl editorial-headline leading-[1.08]">
+          Let's build <br>
+          <span class="text-oryzo-accent italic font-light">something useful.</span>
+        </h2>
+
+        <p class="body-copy text-lg sm:text-xl">
+          Open to AI, Machine Learning, and Data Science internship roles, research projects, and collaborative technical opportunities.
+        </p>
+
+        <!-- Big Clickable Email with Magnetic Touch -->
+        <div class="pt-4">
+          <span class="serial-number block mb-2 font-medium">DIRECT EMAIL INQUIRY</span>
+          <a href="mailto:nagavedhikab@gmail.com" class="text-2xl sm:text-4xl font-display font-bold text-oryzo-cream hover:text-oryzo-accent transition-colors underline decoration-dashed underline-offset-8 magnetic-element inline-block">
+            nagavedhikab@gmail.com
+          </a>
+        </div>
+
+        <!-- Social Channels -->
+        <div class="pt-6 flex flex-wrap items-center gap-6 text-xs font-mono text-oryzo-muted uppercase tracking-wider font-medium">
+          <a href="https://www.linkedin.com/in/naga-vedhika-b-260820327" target="_blank" class="hover:text-oryzo-accent transition-colors flex items-center gap-2 magnetic-element">
+            <i class="fa-brands fa-linkedin text-sm"></i> LINKEDIN ↗
+          </a>
+          <span>/</span>
+          <a href="https://github.com/nagavedhika" target="_blank" class="hover:text-oryzo-accent transition-colors flex items-center gap-2 magnetic-element">
+            <i class="fa-brands fa-github text-sm"></i> GITHUB ↗
+          </a>
+          <span>/</span>
+          <a href="resume.html" target="_blank" class="hover:text-oryzo-accent transition-colors flex items-center gap-2 magnetic-element">
+            <i class="fa-solid fa-file-pdf text-sm"></i> ATS RESUME ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Minimal Footer Signature -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-8 dashed-divider text-xs font-mono text-oryzo-dim">
+        <div>
+          <span>NAGA VEDHIKA B. • 2026</span>
+          <span class="text-oryzo-muted"> // CRAFTED WITH RESTRAINT</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="#hero" class="hover:text-oryzo-cream transition-colors magnetic-element">TOP ↑</a>
+          <span>•</span>
+          <span>SALEM, TAMIL NADU</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= CASE STUDY DEEP-DIVE MODAL (Progressive Reveal) ================= -->
+  <div id="deepdive-modal" class="fixed inset-0 z-50 modal-backdrop hidden flex items-center justify-center p-4 sm:p-8 overflow-y-auto">
+    <div class="relative w-full max-w-4xl max-h-[90vh] bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.2)] rounded-card p-6 sm:p-10 shadow-2xl overflow-y-auto space-y-8">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-6 dashed-divider-b">
+        <div>
+          <span id="dd-category" class="editorial-label block mb-1"></span>
+          <h3 id="dd-title" class="text-2xl sm:text-4xl font-display font-bold text-oryzo-cream"></h3>
+        </div>
+        <button onclick="closeDeepDive()" class="w-10 h-10 rounded-btn bg-oryzo-card border border-dashed border-[rgba(243,237,227,0.2)] flex items-center justify-center text-oryzo-muted hover:text-oryzo-cream transition-colors shrink-0">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- Deep Dive Sections (01-05) -->
+      <div class="space-y-6 text-sm leading-relaxed">
+        
+        <div class="space-y-1.5">
+          <span class="serial-number text-oryzo-accent font-semibold">01 — PROBLEM CONTEXT</span>
+          <p id="dd-problem" class="text-oryzo-muted"></p>
+        </div>
+
+        <div class="space-y-1.5">
+          <span class="serial-number text-oryzo-accent font-semibold">02 — ALGORITHMIC APPROACH</span>
+          <p id="dd-approach" class="text-oryzo-muted"></p>
+        </div>
+
+        <div class="space-y-2">
+          <span class="serial-number text-oryzo-accent font-semibold">03 — TECH STACK</span>
+          <div id="dd-tech" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="space-y-1.5">
+          <span class="serial-number text-oryzo-accent font-semibold">04 — OUTCOME & EFFICACY</span>
+          <p id="dd-outcome" class="text-oryzo-muted"></p>
+        </div>
+
+        <div class="space-y-2">
+          <span class="serial-number text-oryzo-accent font-semibold">05 — LESSONS LEARNED</span>
+          <ul id="dd-lessons" class="space-y-1.5 text-oryzo-muted list-disc list-inside"></ul>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-6 dashed-divider flex items-center justify-between">
+        <a id="dd-github" href="https://github.com/nagavedhika" target="_blank" class="px-6 py-2.5 rounded-btn text-xs font-mono font-semibold text-oryzo-cream border border-dashed border-[rgba(243,237,227,0.2)] hover:border-oryzo-accent transition-all flex items-center gap-2">
+          <i class="fa-brands fa-github"></i> VIEW GITHUB REPO ↗
+        </a>
+        <button onclick="closeDeepDive()" class="px-6 py-2.5 rounded-pill text-xs font-mono font-bold text-oryzo-bg bg-oryzo-cream hover:bg-oryzo-accent transition-all">
+          CLOSE MODAL
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ================= CONTINUOUS GLOBAL LIVING WEBGL & INTERACTION SCRIPT ================= -->
+  <script>
+    // ========================================================================
+    // 01. CONTINUOUS ROOT LIVING WEBGL SCENE (Morhps across all sections)
+    // ========================================================================
+    function initGlobalLivingWebGL() {
+      const canvas = document.getElementById('global-webgl-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 8;
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance"
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+      // 1. HERO 3D NEURAL OBJECT GROUP
+      const heroGroup = new THREE.Group();
+      scene.add(heroGroup);
+
+      const icosaGeom = new THREE.IcosahedronGeometry(2.2, 2);
+      const wireframeMat = new THREE.MeshBasicMaterial({
+        color: 0x3d2716,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.35,
+      });
+      const wireframeMesh = new THREE.Mesh(icosaGeom, wireframeMat);
+      heroGroup.add(wireframeMesh);
+
+      const innerGeom = new THREE.IcosahedronGeometry(1.5, 1);
+      const innerMat = new THREE.MeshBasicMaterial({
+        color: 0xe09f58,
+        wireframe: true,
+        transparent: true,
+        opacity: 0.25,
+      });
+      const innerMesh = new THREE.Mesh(innerGeom, innerMat);
+      heroGroup.add(innerMesh);
+
+      const pointsMat = new THREE.PointsMaterial({
+        color: 0xe09f58,
+        size: 0.04,
+        transparent: true,
+        opacity: 0.85
+      });
+      const heroPoints = new THREE.Points(icosaGeom, pointsMat);
+      heroGroup.add(heroPoints);
+
+      // 2. CONTINUOUS AMBIENT LIVING PARTICLE FIELD
+      const particleCount = 180;
+      const particleGeom = new THREE.BufferGeometry();
+      const particlePositions = new Float32Array(particleCount * 3);
+
+      for (let i = 0; i < particleCount; i++) {
+        particlePositions[i * 3] = (Math.random() - 0.5) * 22;
+        particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 28;
+        particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+      }
+      particleGeom.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+      const particleGlobalMat = new THREE.PointsMaterial({
+        color: 0xe09f58,
+        size: 0.035,
+        transparent: true,
+        opacity: 0.45
+      });
+      const globalParticles = new THREE.Points(particleGeom, particleGlobalMat);
+      scene.add(globalParticles);
+
+      // Mouse Parallax
+      let mouseX = 0, mouseY = 0;
+      let targetX = 0, targetY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      // Handle Resize
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Scroll Tracking
+      let scrollY = 0;
+      window.addEventListener('scroll', () => {
+        scrollY = window.scrollY;
+      });
+
+      // Animation Loop
+      function animate() {
+        requestAnimationFrame(animate);
+
+        targetX += (mouseX - targetX) * 0.05;
+        targetY += (mouseY - targetY) * 0.05;
+
+        // Hero 3D Neural object motion & soft fade when scrolling past hero
+        const heroVisibility = Math.max(0, 1 - scrollY / (window.innerHeight * 0.85));
+        heroGroup.position.y = -scrollY * 0.003;
+        heroGroup.position.x = targetX * 0.4;
+        heroGroup.rotation.y = scrollY * 0.001 + targetX * 0.3;
+        heroGroup.rotation.x = scrollY * 0.0005 + targetY * 0.3;
+        
+        wireframeMat.opacity = 0.35 * heroVisibility;
+        innerMat.opacity = 0.25 * heroVisibility;
+        pointsMat.opacity = 0.85 * heroVisibility;
+
+        // Continuous Ambient Particle Motion
+        const positions = particleGeom.attributes.position.array;
+        for (let i = 0; i < particleCount; i++) {
+          positions[i * 3 + 1] -= 0.004;
+          if (positions[i * 3 + 1] < -14) {
+            positions[i * 3 + 1] = 14;
+          }
+        }
+        particleGeom.attributes.position.needsUpdate = true;
+
+        globalParticles.rotation.y = scrollY * 0.0003 + targetX * 0.15;
+        globalParticles.rotation.x = targetY * 0.1;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    }
+
+
+    // ========================================================================
+    // 02. FLUID CURSOR & MAGNETIC INTERACTION
+    // ========================================================================
+    function initCursorAndMagnetic() {
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      const progressBar = document.getElementById('scroll-bar');
+
+      let mouseX = 0, mouseY = 0;
+      let ringX = 0, ringY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (dot) {
+          dot.style.left = `${mouseX}px`;
+          dot.style.top = `${mouseY}px`;
+        }
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        if (ring) {
+          ring.style.left = `${ringX}px`;
+          ring.style.top = `${ringY}px`;
+        }
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      // Hover scale on interactive elements
+      document.querySelectorAll('a, button, .tilt-card, input, li').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovered'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovered'));
+      });
+
+      // 3D Tilt Card Interaction
+      document.querySelectorAll('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          card.style.transform = `perspective(1000px) rotateY(${x * 0.03}deg) rotateX(${-y * 0.03}deg) translateY(-4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateY(0px)';
+        });
+      });
+
+      // Scroll Progress Bar
+      window.addEventListener('scroll', () => {
+        const totalScroll = document.documentElement.scrollTop;
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = (totalScroll / windowHeight) * 100;
+        if (progressBar) {
+          progressBar.style.width = `${scrollPercent}%`;
+        }
+      });
+    }
+
+
+    // ========================================================================
+    // 03. INTERACTIVE PROGRESSIVE DISCLOSURE & CASE STUDY MODAL
+    // ========================================================================
+    const projectCaseStudies = {
+      'ai-healthcare': {
+        category: 'HEALTHCARE AI & PREDICTIVE ML',
+        title: 'AI Healthcare Treatment Response Recommendation',
+        problem: 'Medical treatments often yield varying success rates depending on individual patient physiological indicators, clinical biomarkers, and medical history. Clinicians require data-grounded probability assessments to assist rapid decision-making.',
+        approach: 'Developed a structured machine learning pipeline that ingests tabular clinical metrics, conducts automated feature scaling and correlation analysis, and applies classification algorithms to forecast the most suitable treatment response probabilities.',
+        tech: ['Python', 'Scikit-Learn', 'Supervised ML', 'Data Pipelines', 'Healthcare Analytics'],
+        outcome: 'Successfully engineered a predictive prototype capable of evaluating clinical indicators, supporting personalized patient efficacy estimation, and demonstrating how data science assists diagnostic workflows.',
+        lessons: [
+          'Handling clinical dataset class distributions and feature correlation metrics.',
+          'Balancing precision vs. recall when evaluating health-critical classification models.',
+          'Structuring modular Python pipelines for feature engineering and model serialization.'
+        ]
+      },
+      'fullstack-ai': {
+        category: 'FULL-STACK & CONVERSATIONAL AI',
+        title: 'Full-Stack Web App with AI Chatbot Integration',
+        problem: 'Modern digital catalog applications need synchronized relational data integrity, user session security, and dynamic customer assistance without clunky navigation.',
+        approach: 'Built a full-stack web application with secure authentication flows and relational MySQL data tables. Integrated an AI-powered conversational chatbot capable of parsing user queries, recommending menu items, answering common FAQs, and assisting order workflows in real-time.',
+        tech: ['Full-Stack', 'Conversational AI', 'MySQL Relational', 'Authentication', 'Python / Web'],
+        outcome: 'Delivered a functional, responsive application combining secure authentication, relational database transactions, and an intuitive conversational assistant that improves user engagement.',
+        lessons: [
+          'Designing relational schema constraints for user orders and inventory catalogs in MySQL.',
+          'Managing asynchronous state between chatbot conversation threads and application database state.',
+          'Implementing secure session authentication and responsive layout design.'
+        ]
+      }
+    };
+
+    function openDeepDive(id) {
+      const data = projectCaseStudies[id];
+      if (!data) return;
+
+      document.getElementById('dd-category').textContent = data.category;
+      document.getElementById('dd-title').textContent = data.title;
+      document.getElementById('dd-problem').textContent = data.problem;
+      document.getElementById('dd-approach').textContent = data.approach;
+      document.getElementById('dd-outcome').textContent = data.outcome;
+
+      document.getElementById('dd-tech').innerHTML = data.tech.map(t => `
+        <span class="px-3 py-1 bg-oryzo-surface border border-dashed border-[rgba(243,237,227,0.2)] text-xs font-mono text-oryzo-cream">${t}</span>
+      `).join('');
+
+      document.getElementById('dd-lessons').innerHTML = data.lessons.map(l => `
+        <li>${l}</li>
+      `).join('');
+
+      const modal = document.getElementById('deepdive-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeDeepDive() {
+      const modal = document.getElementById('deepdive-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDeepDive();
+    });
+
+
+    // Interactive Skill Highlight
+    function showSkillHighlight(name, desc) {
+      const titleEl = document.getElementById('skill-context-title');
+      const descEl = document.getElementById('skill-context-desc');
+      if (titleEl && descEl) {
+        titleEl.textContent = `🎯 ${name.toUpperCase()}`;
+        descEl.textContent = desc;
+      }
+    }
+
+
+    // Interactive Timeline Accordion
+    function toggleTimelineDetail(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.toggle('hidden');
+      }
+    }
+
+
+    // ========================================================================
+    // 04. SCROLL REVEAL (INTERSECTION OBSERVER)
+    // ========================================================================
+    function initScrollReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal-block').forEach(el => observer.observe(el));
+    }
+
+
+    // ========================================================================
+    // 05. MOBILE DRAWER NAVIGATION
+    // ========================================================================
+    function initMobileMenu() {
+      const toggle = document.getElementById('mobile-toggle');
+      const close = document.getElementById('mobile-close');
+      const menu = document.getElementById('mobile-menu');
+
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => menu.classList.remove('hidden'));
+      }
+      if (close && menu) {
+        close.addEventListener('click', () => menu.classList.add('hidden'));
+      }
+      document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => menu && menu.classList.add('hidden'));
+      });
+    }
+
+
+    // ========================================================================
+    // 06. BOOTSTRAP ON LOAD
+    // ========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      initGlobalLivingWebGL();
+      initCursorAndMagnetic();
+      initScrollReveal();
+      initMobileMenu();
+    });
+  </script>
+</body>
+</html>
