@@ -61,6 +61,9 @@
     html {
       scroll-behavior: auto;
       background: #11101A;
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
     }
 
     body {
@@ -68,7 +71,10 @@
       background: #11101A;
       color: #FFFFFF !important;
       overflow-x: hidden;
+      overflow-y: auto;
+      min-height: 100vh;
       font-family: "Plus Jakarta Sans", sans-serif;
+      overscroll-behavior-y: auto;
     }
 
     p, span, a, li, div {
@@ -117,6 +123,42 @@
       border-radius: 10px;
     }
 
+    .custom-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(196, 166, 255, 0.9) rgba(17, 16, 26, 0.28);
+      scrollbar-gutter: stable;
+    }
+
+    .protosem-week-list,
+    .protosem-blog-list {
+      height: 460px;
+      max-height: 460px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-right: 0.5rem;
+      scrollbar-gutter: stable;
+      min-height: 0;
+      position: relative;
+      z-index: 2;
+      touch-action: pan-y;
+      overscroll-behavior: contain;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(17, 16, 26, 0.24);
+      border-radius: 999px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #C4A6FF, #38BDF8);
+      border-radius: 999px;
+      border: 2px solid rgba(17, 16, 26, 0.28);
+    }
+
     #webgl-canvas {
       position: fixed;
       inset: 0;
@@ -129,7 +171,8 @@
     .content-layer {
       position: relative;
       z-index: 10;
-      pointer-events: none;
+      pointer-events: auto;
+      overflow: visible;
     }
 
     .content-layer a,
@@ -138,7 +181,10 @@
     .content-layer .skill-card,
     .content-layer .project-card,
     .content-layer .certificate-card,
-    .content-layer .clickable {
+    .content-layer .clickable,
+    .content-layer .protosem-week-list,
+    .content-layer .protosem-blog-list,
+    .content-layer .protosem-details {
       pointer-events: auto;
     }
 
@@ -161,6 +207,35 @@
       box-shadow:
         0 25px 90px rgba(196, 166, 255, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    #protosem {
+      position: relative;
+    }
+
+    #protosem-card {
+      border-color: rgba(196, 166, 255, 0.45) !important;
+      box-shadow:
+        0 20px 60px rgba(17, 16, 26, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    #protosem-details > div {
+      border-color: rgba(196, 166, 255, 0.18) !important;
+      box-shadow: 0 16px 48px rgba(17, 16, 26, 0.32);
+    }
+
+    #protosem .protosem-week-list > div,
+    #protosem .protosem-blog-list > div {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    #protosem .protosem-week-list > div:hover,
+    #protosem .protosem-blog-list > div:hover {
+      border-color: rgba(196, 166, 255, 0.4);
+      background: rgba(196, 166, 255, 0.04);
     }
 
     .hud-line {
@@ -294,25 +369,6 @@
               </a>
             </div>
 
-            <!-- FEATURED SKILLS STRIP -->
-            <div class="mt-10">
-              <span class="font-mono text-[11px] tracking-widest text-violet font-bold">CORE STACK</span>
-              <div class="mt-4 flex flex-wrap gap-3">
-                <span class="featured-skill-chip glass px-4 py-2 rounded-full font-mono text-xs font-bold text-white border border-violet/40 hover:border-violet hover:text-violet transition cursor-default">Python</span>
-                <span class="featured-skill-chip glass px-4 py-2 rounded-full font-mono text-xs font-bold text-white border border-cyan/40 hover:border-cyan hover:text-cyan transition cursor-default">Java</span>
-                <span class="featured-skill-chip glass px-4 py-2 rounded-full font-mono text-xs font-bold text-white border border-emerald/40 hover:border-emerald hover:text-emerald transition cursor-default">C++</span>
-                <span class="featured-skill-chip glass px-4 py-2 rounded-full font-mono text-xs font-bold text-white border border-pink/40 hover:border-pink hover:text-pink transition cursor-default">Machine Learning</span>
-                <span class="featured-skill-chip glass px-4 py-2 rounded-full font-mono text-xs font-bold text-white border border-violet/40 hover:border-violet hover:text-violet transition cursor-default">MySQL</span>
-                <span class="featured-skill-chip glass px-4 py-2 rounded-full font-mono text-xs font-bold text-white border border-cyan/40 hover:border-cyan hover:text-cyan transition cursor-default">JavaScript</span>
-              </div>
-            </div>
-
-            <div class="mt-12 font-mono text-xs text-slate-200">
-              MOVE YOUR CURSOR.<br>
-              CLICK.<br>
-              SCROLL.<br>
-              <span class="text-cyan font-bold">THE FIELD RESPONDS.</span>
-            </div>
           </div>
 
           <div class="lg:col-span-5 flex justify-center lg:justify-end">
@@ -330,36 +386,6 @@
                 </div>
               </div>
             </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- DISCOVERY -->
-    <section id="discovery" class="h-[180vh] relative">
-      <div class="sticky top-0 h-screen flex items-center justify-center px-6">
-        <div class="text-center relative w-full max-w-6xl">
-
-          <!-- STATEMENT 1 -->
-          <div id="statement1" class="absolute inset-0 flex flex-col items-center justify-center">
-            <h2 class="text-5xl md:text-8xl font-display font-extrabold tracking-tight">
-              CURIOUS BY DEFAULT.
-            </h2>
-          </div>
-
-          <!-- STATEMENT 2 -->
-          <div id="statement2" class="absolute inset-0 flex flex-col items-center justify-center opacity-0">
-            <h2 class="text-5xl md:text-8xl font-display font-extrabold tracking-tight">
-              LEARNING BY BUILDING.
-            </h2>
-          </div>
-
-          <!-- STATEMENT 3 -->
-          <div id="statement3" class="absolute inset-0 flex flex-col items-center justify-center opacity-0">
-            <h2 class="text-5xl md:text-8xl font-display font-extrabold tracking-tight">
-              EXPLORING INTELLIGENCE.
-            </h2>
           </div>
 
         </div>
@@ -596,9 +622,9 @@
                   <span class="font-mono text-xs text-white font-bold">21 MILESTONES</span>
                 </div>
                 <h4 class="text-2xl font-display font-bold">Weekly Progression</h4>
-                <p class="mt-2 text-xs text-slate-200">Click any week to expand details.</p>
+                <p class="mt-2 text-xs text-slate-200">Click any week to open the full details page.</p>
 
-                <div class="mt-6 space-y-2.5 max-h-[460px] overflow-y-auto pr-2 custom-scrollbar">
+                <div class="mt-6 space-y-2.5 protosem-week-list custom-scrollbar">
                   
                   <div class="p-3 rounded-xl bg-white/10 hover:bg-white/20 transition cursor-pointer" onclick="toggleWeek('w0')">
                     <div class="flex justify-between items-center text-xs font-mono text-cyan font-bold">
@@ -782,35 +808,47 @@
                 <h4 class="text-2xl font-display font-bold">ProtoSem Blogs</h4>
                 <p class="mt-2 text-xs text-slate-200">Click any card to read the full reflection.</p>
 
-                <div class="mt-6 space-y-4 max-h-[460px] overflow-y-auto pr-2 custom-scrollbar">
+                <div class="mt-6 space-y-4 protosem-blog-list custom-scrollbar">
 
                   <div class="p-4 rounded-xl bg-white/10 hover:bg-white/20 transition cursor-pointer border border-white/10" onclick="toggleBlog('b1')">
                     <span class="font-mono text-[10px] text-violet uppercase tracking-wider font-bold">REFLECTIONS // ARTICLE 01</span>
-                    <h5 class="mt-1 font-display font-bold text-base text-white">Bridging Physical Retail & AI Systems</h5>
-                    <p class="mt-2 text-xs text-slate-100 line-clamp-2">How intelligent workflows transform traditional point-of-sale systems into connected ecosystems.</p>
-                    
-                    <div id="b1-full" class="hidden mt-3 pt-3 border-t border-white/20 text-xs text-slate-100 leading-6">
-                      Traditional retail often suffers from inventory blind spots and slow data loops. Exploring Phygital paradigms showed us how low-latency computer vision and prompt-assisted cataloging can bridge hardware shelf tracking directly to real-time commerce platforms.
+                    <h5 class="mt-1 font-display font-bold text-base text-white">Reflections // Bridging People &amp; Perspectives</h5>
+                    <p class="mt-2 text-xs text-slate-100 line-clamp-2">A reflection on how the early ProtoSem activities built trust, perspective, and collaboration before the technical work really began.</p>
+
+                    <div id="b1-full" class="hidden mt-3 pt-3 border-t border-white/20 text-xs text-slate-100 leading-6" data-title="Reflections // Bridging People &amp; Perspectives">
+                      There’s a version of “teamwork” that gets taught in slides — communication, trust, shared goals. And then there’s the version you actually live through, which looks a lot less polished: a Rock-Paper-Scissors icebreaker with strangers, a spaghetti tower that collapses twice, a Scratch project that turns into an inside joke. Three weeks into ProtoSem, I started noticing that the “soft” parts of this program were never really soft. They were the foundation everything technical eventually stood on.
+                      <br><br>
+                      Week 0 didn’t ease us into anything. It threw us straight into a room of people we’d never met and asked us to talk, play, and observe together before we’d even learned each other’s names properly. The Marshmallow Tower Challenge was where the reflection stopped being theoretical. Our first tower fell because we hadn’t yet learned to actually listen to each other under pressure. The second attempt worked because something had shifted — less talking over each other, more building on what the last person said. That was a small, physical proof of trust.
+                      <br><br>
+                      By Week 1, the cohort didn’t feel like strangers anymore, but the bonding didn’t stop — it just moved into different spaces. Onam wasn’t on the technical syllabus, but it let people be people, outside of problem statements and frameworks. I noticed those conversations went deeper than most of our structured team discussions, simply because nobody was trying to solve anything. That made the trust feel real, not just rehearsed.
                     </div>
                   </div>
 
                   <div class="p-4 rounded-xl bg-white/10 hover:bg-white/20 transition cursor-pointer border border-white/10" onclick="toggleBlog('b2')">
                     <span class="font-mono text-[10px] text-cyan uppercase tracking-wider font-bold">TECHNICAL // ARTICLE 02</span>
-                    <h5 class="mt-1 font-display font-bold text-base text-white">Prompting & Autonomous Agent Architectures</h5>
-                    <p class="mt-2 text-xs text-slate-100 line-clamp-2">Key lessons learned when moving from basic LLM prompts to resilient tool-calling workflows.</p>
-                    
-                    <div id="b2-full" class="hidden mt-3 pt-3 border-t border-white/20 text-xs text-slate-100 leading-6">
-                      Reliability is everything. In this phase, we moved from raw text generation to strict structured JSON outputs, integrating guardrails that allow autonomous agents to reliably query inventory databases and dispatch order queries without hallucinations.
+                    <h5 class="mt-1 font-display font-bold text-base text-white">Technical // From Prompts to Prototypes</h5>
+                    <p class="mt-2 text-xs text-slate-100 line-clamp-2">A technical reflection on why intentional tool selection, visible logic, and real constraints matter more than chasing the newest technology.</p>
+
+                    <div id="b2-full" class="hidden mt-3 pt-3 border-t border-white/20 text-xs text-slate-100 leading-6" data-title="Technical // From Prompts to Prototypes">
+                      I went into ProtoSem expecting the technical track to start with a tool. Instead, it started with a warning: don’t use technology just because it’s available. That one line, delivered almost casually in a Week 0 talk on prompt engineering, ended up shaping how I approached every technical concept that came after it — from AI tools to algorithms to my first real app build.
+                      <br><br>
+                      The Week 0 Tech Talk on prompt engineering wasn’t really about clever prompt tricks. It was about intentionality — picking the right AI tool for a specific need, inside a specific domain, instead of throwing the newest tool at every problem. That framing kept resurfacing in Week 1’s talks on recommendation algorithms, Power BI, and Base44. Each one came with a question attached: what specific kind of decision does this actually help someone make?
+                      <br><br>
+                      Week 2 was where “intentional technology” became practical. Before we touched an app-building platform, we spent a full day on algorithms and flowcharts. That exercise reframed what programming means to me. It’s not about syntax first — it’s about being able to break something messy and human into a sequence clear enough that a machine or another person could follow it without guessing.
                     </div>
                   </div>
 
                   <div class="p-4 rounded-xl bg-white/10 hover:bg-white/20 transition cursor-pointer border border-white/10" onclick="toggleBlog('b3')">
                     <span class="font-mono text-[10px] text-emerald uppercase tracking-wider font-bold">INNOVATION // ARTICLE 03</span>
-                    <h5 class="mt-1 font-display font-bold text-base text-white">Prototyping Under Constraint</h5>
-                    <p class="mt-2 text-xs text-slate-100 line-clamp-2">Reflections on cross-disciplinary collaboration, sprint milestones, and agile pivots.</p>
-                    
-                    <div id="b3-full" class="hidden mt-3 pt-3 border-t border-white/20 text-xs text-slate-100 leading-6">
-                      Building a functional MVP in rapid weekly cycles required prioritizing essential features over perfectionism. We learned the immense value of early peer testing, clear technical documentation, and cross-functional teamwork.
+                    <h5 class="mt-1 font-display font-bold text-base text-white">Innovation // Prototyping Under Constraint</h5>
+                    <p class="mt-2 text-xs text-slate-100 line-clamp-2">Why constraints — limited materials, limited knowledge, and validated problems — sharpen innovation instead of slowing it down.</p>
+
+                    <div id="b3-full" class="hidden mt-3 pt-3 border-t border-white/20 text-xs text-slate-100 leading-6" data-title="Innovation // Prototyping Under Constraint">
+                      If there’s one myth ProtoSem has quietly dismantled for me, it’s that innovation starts with a good idea. Three weeks in, I’d argue it actually starts with a good constraint — a limited set of materials, a limited amount of time, a limited and validated problem to solve. Every real building exercise so far has forced us to work inside a box, and every time, the box turned out to be the point.
+                      <br><br>
+                      The earliest version of this lesson showed up in Week 0’s Marshmallow Tower Challenge — spaghetti, tape, thread, and one marshmallow, all structured into a race against the clock. What actually worked was the opposite of planning the “perfect” tower first. We built something rough, watched it fall, noticed why, adjusted, and rebuilt. That’s the entire innovation cycle compressed into twenty minutes with snack food.
+                      <br><br>
+                      Week 1 introduced a subtler constraint — not a resource limit, but a knowledge limit. In design thinking applied to an eyewear retail scenario, the challenge wasn’t just coming up with ideas. It was resisting the urge to design for an imagined customer instead of sitting with what an actual customer might need. Then Week 2 made the lesson literal by forcing us to validate a real problem before committing to build it.
                     </div>
                   </div>
 
@@ -994,6 +1032,23 @@
       </div>
       <div class="hud-line my-6"></div>
       <div id="modal-images" class="space-y-5"></div>
+    </div>
+  </div>
+
+  <!-- BLOG DETAIL MODAL -->
+  <div id="blog-modal" class="fixed inset-0 z-[101] flex items-center justify-center p-6 bg-black/85 backdrop-blur-xl opacity-0 pointer-events-none transition">
+    <div class="glass rounded-3xl p-6 md:p-10 max-w-4xl w-full max-h-[88vh] overflow-y-auto">
+      <div class="flex justify-between items-start gap-6">
+        <div>
+          <span class="font-mono text-xs text-violet font-bold">PROTOSEM BLOG</span>
+          <h3 id="blog-modal-title" class="text-2xl md:text-3xl font-display font-bold mt-3 text-white">Blog</h3>
+        </div>
+        <button id="close-blog-modal" class="font-mono text-xs text-slate-200 hover:text-white font-bold shrink-0">
+          [ CLOSE ]
+        </button>
+      </div>
+      <div class="hud-line my-6"></div>
+      <div id="blog-modal-content" class="text-sm md:text-base leading-7 text-slate-100"></div>
     </div>
   </div>
 
@@ -1263,13 +1318,6 @@
     function initScroll() {
       gsap.registerPlugin(ScrollTrigger);
 
-      const lenis = new Lenis({ duration: 1.0, smoothWheel: true, syncTouch: false });
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
-
       ScrollTrigger.create({
         trigger: "#discovery",
         start: "top center",
@@ -1356,6 +1404,24 @@
     const protoDescription = document.getElementById("protosem-description");
     const protoDetails = document.getElementById("protosem-details");
     const protoToggleIndicator = document.getElementById("protosem-toggle-indicator");
+    const blogModal = document.getElementById("blog-modal");
+    const blogModalTitle = document.getElementById("blog-modal-title");
+    const blogModalContent = document.getElementById("blog-modal-content");
+
+    function persistProtosemState() {
+      if (!protoDescription || !protoDetails) return;
+      sessionStorage.setItem("protosemExpanded", String(!protoDescription.classList.contains("hidden")));
+    }
+
+    function restoreProtosemState() {
+      if (!protoDescription || !protoDetails || !protoToggleIndicator) return;
+      const shouldExpand = sessionStorage.getItem("protosemExpanded") === "true" || window.location.hash === "#protosem";
+      if (shouldExpand) {
+        protoDescription.classList.remove("hidden");
+        protoDetails.classList.remove("hidden");
+        protoToggleIndicator.textContent = "[ - COLLAPSE ]";
+      }
+    }
 
     if (protoCard && protoDescription && protoDetails) {
       protoCard.addEventListener("click", () => {
@@ -1363,24 +1429,45 @@
         protoDescription.classList.toggle("hidden", isCurrentlyOpen);
         protoDetails.classList.toggle("hidden", isCurrentlyOpen);
         protoToggleIndicator.textContent = isCurrentlyOpen ? "[ + EXPAND ]" : "[ - COLLAPSE ]";
+        persistProtosemState();
         ScrollTrigger.refresh();
       });
     }
 
     function toggleWeek(id) {
-      const el = document.getElementById(`${id}-content`);
-      const arrow = document.getElementById(`${id}-arrow`);
-      if (el) {
-        const isHidden = el.classList.contains("hidden");
-        el.classList.toggle("hidden");
-        if (arrow) arrow.textContent = isHidden ? "▲" : "▼";
-      }
+      sessionStorage.setItem("protosemExpanded", "true");
+      window.location.href = `protosem-week.html?week=${id}`;
     }
 
     function toggleBlog(id) {
-      const el = document.getElementById(`${id}-full`);
-      if (el) el.classList.toggle("hidden");
+      const full = document.getElementById(`${id}-full`);
+      if (!full || !blogModal || !blogModalTitle || !blogModalContent) return;
+      blogModalTitle.textContent = full.dataset.title || full.getAttribute("data-title") || "ProtoSem Blog";
+      blogModalContent.innerHTML = full.innerHTML;
+      blogModal.classList.remove("opacity-0", "pointer-events-none");
     }
+
+    if (document.getElementById("close-blog-modal")) {
+      document.getElementById("close-blog-modal").addEventListener("click", () => {
+        blogModal.classList.add("opacity-0", "pointer-events-none");
+      });
+    }
+
+    if (blogModal) {
+      blogModal.addEventListener("click", (e) => {
+        if (e.target === blogModal) {
+          blogModal.classList.add("opacity-0", "pointer-events-none");
+        }
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !blogModal.classList.contains("opacity-0")) {
+          blogModal.classList.add("opacity-0", "pointer-events-none");
+        }
+      });
+    }
+
+    restoreProtosemState();
 
     function initSkillInteraction() {
       document.querySelectorAll(".skill-card").forEach((card) => {

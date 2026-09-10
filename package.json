@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "npm run build:protosem && tsc && vite build",
+    "preview": "vite preview",
+    "build:protosem": "node scripts/build-protosem.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",

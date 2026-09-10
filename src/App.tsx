@@ -1,7 +1,99 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { PORTFOLIO_DATA } from "@/data/portfolioData";
-import { ExternalLink, Mail, Github, Linkedin, FileText, ArrowRight } from "lucide-react";
+import protosem from "@/content/protosem.json";
+
+type ProtoDay = { id: string; name: string; content: string; images: string[] };
+type ProtoWeek = { id: string; number: number; title: string; days: ProtoDay[] };
+const PROTOSEM = protosem as ProtoWeek[];
+
+function renderMarkdown(text: string) {
+  const lines = text.split(/\r?\n/);
+  const blocks: React.ReactNode[] = [];
+  let list: string[] = [];
+  const flushList = () => {
+    if (!list.length) return;
+    blocks.push(<ul key={`list-${blocks.length}`} className="list-disc pl-5 space-y-1 text-[#b8ada1]">{list.map((item, i) => <li key={i}>{item}</li>)}</ul>);
+    list = [];
+  };
+  lines.forEach((line, i) => {
+    const trimmed = line.trim();
+    if (!trimmed) { flushList(); return; }
+    if (trimmed.startsWith('![')) {
+      flushList();
+      const m = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (m) blocks.push(<img key={`img-${i}`} src={m[2]} alt={m[1]} className="max-h-96 w-full object-contain rounded-lg border border-dashed border-[rgba(243,237,227,0.12)] my-3" />);
+      return;
+    }
+    if (trimmed.startsWith('> ')) { flushList(); blocks.push(<blockquote key={i} className="border-l-2 border-[#e09f58] pl-4 italic text-[#b8ada1]">{trimmed.slice(2)}</blockquote>); return; }
+    if (trimmed.startsWith('### ')) { flushList(); blocks.push(<h5 key={i} className="font-mono text-xs uppercase tracking-wider text-[#e09f58] mt-4">{trimmed.slice(4)}</h5>); return; }
+    if (trimmed.startsWith('## ')) { flushList(); blocks.push(<h4 key={i} className="text-lg font-display font-bold text-[#F3EDE3] mt-4">{trimmed.slice(3)}</h4>); return; }
+    if (trimmed.startsWith('# ')) { flushList(); blocks.push(<h3 key={i} className="text-xl font-display font-bold text-[#F3EDE3]">{trimmed.slice(2)}</h3>); return; }
+    if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) { list.push(trimmed.slice(2)); return; }
+    flushList();
+    blocks.push(<p key={i} className="text-sm leading-7 text-[#b8ada1]">{trimmed}</p>);
+  });
+  flushList();
+  return <div className="space-y-3">{blocks}</div>;
+}
+
+function ProtoSemSection() {
+  const loggedWeeks = PROTOSEM.filter((week) => week.days.length > 0);
+  const latestLogged = loggedWeeks.length ? loggedWeeks[loggedWeeks.length - 1].number : 0;
+  const [selectedWeek, setSelectedWeek] = useState(latestLogged);
+  const week = PROTOSEM.find((item) => item.number === selectedWeek) ?? PROTOSEM[0];
+
+  if (!week) return null;
+
+  return (
+    <div className="space-y-12">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+        <div>
+          <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">04 // PROTOSEM LOG</span>
+          <h2 className="text-3xl sm:text-5xl font-display font-bold text-[#F3EDE3] tracking-tight mt-2">Learning in public.</h2>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-[#b8ada1]">Your 20-week ProtoSem journal, powered by Obsidian. Select a week to open its daily notes, screenshots, and learning record.</p>
+        </div>
+        <span className="font-mono text-xs text-[#786e64]">{loggedWeeks.length}/20 WEEKS LOGGED</span>
+      </div>
+
+      <div className="max-h-[460px] overflow-y-auto pr-2 scroll-smooth">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+          {PROTOSEM.map((item) => {
+            const hasContent = item.days.length > 0;
+            const active = item.number === selectedWeek;
+            return (
+              <button key={item.id} onClick={() => setSelectedWeek(item.number)} className={`text-left p-5 rounded-[12px] border border-dashed transition-all ${active ? 'border-[#e09f58] bg-[#1f150d]' : 'border-[rgba(243,237,227,0.12)] bg-[#181008] hover:border-[#e09f58]/50'}`}>
+                <span className={`font-mono text-[10px] ${active ? 'text-[#e09f58]' : 'text-[#786e64]'}`}>WEEK</span>
+                <div className={`text-2xl font-display font-bold mt-1 ${active ? 'text-[#F3EDE3]' : 'text-[#b8ada1]'}`}>{String(item.number).padStart(2, '0')}</div>
+                <div className={`font-mono text-[9px] uppercase tracking-wider mt-3 ${hasContent ? 'text-[#e09f58]' : 'text-[#786e64]'}`}>{hasContent ? '● LOGGED' : '○ UPCOMING'}</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="rounded-[12px] bg-[#181008] border border-dashed border-[rgba(243,237,227,0.12)] overflow-hidden">
+        <div className="p-6 sm:p-8 border-b border-dashed border-[rgba(243,237,227,0.10)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div><span className="font-mono text-xs text-[#e09f58]">WEEK {String(week.number).padStart(2, '0')}</span><h3 className="text-2xl sm:text-3xl font-display font-bold text-[#F3EDE3] mt-1">{week.title}</h3></div>
+          <span className="font-mono text-xs text-[#786e64]">{week.days.length} ACTIVE DAY{week.days.length === 1 ? '' : 'S'}</span>
+        </div>
+        {week.days.length === 0 ? (
+          <div className="p-8 font-mono text-sm text-[#786e64]">No update yet. Add notes to <span className="text-[#e09f58]">portfolio-content/{week.id}/</span> in Obsidian.</div>
+        ) : (
+          <div className="p-6 sm:p-8 space-y-8">
+            {week.days.map((day) => (
+              <article key={day.id} className="border-t border-dashed border-[rgba(243,237,227,0.10)] pt-6 first:border-t-0 first:pt-0">
+                <div className="flex items-center justify-between gap-4 mb-5"><h4 className="font-mono text-sm uppercase tracking-wider text-[#e09f58]">{day.name}</h4><span className="font-mono text-[10px] text-[#786e64]">{day.images.length} IMAGE{day.images.length === 1 ? '' : 'S'}</span></div>
+                {day.content ? renderMarkdown(day.content) : <p className="text-sm text-[#786e64]">No written update for this day.</p>}
+                {day.images.length > 0 && <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5">{day.images.map((src) => <img key={src} src={src} alt={`${day.name} ProtoSem evidence`} loading="lazy" className="w-full aspect-video object-cover rounded-lg border border-dashed border-[rgba(243,237,227,0.12)]" />)}</div>}
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -168,6 +260,7 @@ export function App() {
           <nav className="hidden md:flex items-center gap-8 text-xs font-mono tracking-widest text-[#b8ada1] uppercase font-medium">
             <a href="#manifesto" className="hover:text-[#F3EDE3] transition-colors">01.MANIFESTO</a>
             <a href="#projects" className="hover:text-[#F3EDE3] transition-colors">02.WORK</a>
+            <a href="#protosem" className="hover:text-[#F3EDE3] transition-colors">03.PROTOSEM</a>
             <a href="#skills" className="hover:text-[#F3EDE3] transition-colors">03.STACK</a>
             <a href="#experience" className="hover:text-[#F3EDE3] transition-colors">04.TIMELINE</a>
             <a href="#about" className="hover:text-[#F3EDE3] transition-colors">05.ABOUT</a>
@@ -302,12 +395,17 @@ export function App() {
         ))}
       </section>
 
-      {/* 4. SKILLS / STACK (100vh) */}
+      {/* 4. PROTOSEM — Obsidian-powered weekly journal */}
+      <section id="protosem" className="min-h-screen px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto border-t border-dashed border-[rgba(243,237,227,0.12)]">
+        <ProtoSemSection />
+      </section>
+
+      {/* 5. SKILLS / STACK (100vh) */}
       <section id="skills" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto border-t border-dashed border-[rgba(243,237,227,0.12)]">
         <div className="space-y-12">
           <div className="flex items-center justify-between">
             <div>
-              <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">04 // TECH STACK & COMPETENCIES</span>
+              <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">05 // TECH STACK & COMPETENCIES</span>
               <h2 className="text-3xl sm:text-5xl font-display font-bold text-[#F3EDE3] tracking-tight mt-2">
                 Systematic Knowledge.
               </h2>
@@ -333,10 +431,10 @@ export function App() {
         </div>
       </section>
 
-      {/* 5. TIMELINE / EXPERIENCE (100vh) */}
+      {/* 6. TIMELINE / EXPERIENCE (100vh) */}
       <section id="experience" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto border-t border-dashed border-[rgba(243,237,227,0.12)]">
         <div className="space-y-12">
-          <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">05 // CHRONOLOGY & RECORD</span>
+          <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">06 // CHRONOLOGY & RECORD</span>
           <h2 className="text-3xl sm:text-5xl font-display font-bold text-[#F3EDE3] tracking-tight">
             Experience & Credentials.
           </h2>
@@ -365,11 +463,11 @@ export function App() {
         </div>
       </section>
 
-      {/* 6. ABOUT (100vh) */}
+      {/* 7. ABOUT (100vh) */}
       <section id="about" className="min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-28 lg:py-36 max-w-7xl mx-auto border-t border-dashed border-[rgba(243,237,227,0.12)]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-6">
-            <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">06 // HUMAN DIMENSION</span>
+            <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">07 // HUMAN DIMENSION</span>
             <h2 className="text-3xl sm:text-5xl font-display font-bold text-[#F3EDE3] leading-tight">
               Curious, deliberate, <br />
               <span className="text-[#b8ada1] font-normal">and always building.</span>
@@ -393,9 +491,9 @@ export function App() {
         </div>
       </section>
 
-      {/* 7. CONTACT (100vh) */}
+      {/* 8. CONTACT (100vh) */}
       <section id="contact" className="min-h-screen flex flex-col justify-between px-6 sm:px-12 lg:px-20 pt-28 pb-12 max-w-7xl mx-auto border-t border-dashed border-[rgba(243,237,227,0.12)]">
-        <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">07 // INITIATION</span>
+        <span className="font-mono text-[12px] text-[#e09f58] uppercase tracking-[0.12em] font-medium">08 // INITIATION</span>
         <div className="my-auto py-12 space-y-8 max-w-4xl">
           <h2 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold text-[#F3EDE3] tracking-tight leading-[1.08]">
             Let's build <br />
