@@ -1,0 +1,101 @@
+{
+  "isSample": false,
+  "name": "Naga Vedhika B.",
+  "firstName": "Vedhika",
+  "role": "Computer Science Student — AI / ML / Data Science",
+  "email": "nagavedhikab@gmail.com",
+  "location": "Salem, Tamil Nadu, India",
+  "intro": "Computer Science student building useful solutions with AI, Machine Learning and Data Science.",
+  "about": "I am a third-year Computer Science and Engineering student at Kumaraguru College of Technology, currently focusing on AI, Machine Learning and Data Science. I am interested in understanding how technology can be applied to real-world problems and turned into useful solutions. My interests include artificial intelligence, data-driven applications, practical problem-solving and building technology that can have a useful impact. I have worked on projects involving healthcare AI, textile sorting, phishing email detection and smart classroom applications.",
+  "chapters": [
+    { "id": "about", "label": "About me", "narration": "Hey, I'm Nova, your co-pilot. Welcome to Vedhika's world of ideas, creativity, and technology." },
+    { "id": "education", "label": "Education", "narration": "Every journey starts with learning. Here's a look at Vedhika's path so far." },
+    { "id": "skills", "label": "My skills", "narration": "Tools turn ideas into reality. Here's what Vedhika uses to build, design, and create." },
+    { "id": "projects", "label": "Projects", "narration": "Here's where ideas become real. Explore the projects Vedhika has built and experimented with." },
+    { "id": "protosem", "label": "ProtoSem", "narration": "This is Vedhika's hands-on journey — 20 weeks of exploring, building, and learning through experience." },
+    { "id": "credentials", "label": "Credentials", "narration": "Here are the milestones along the way — certifications, internships, and other achievements." },
+    { "id": "beyond", "label": "Beyond tech", "narration": "There's more to Vedhika than technology. Here's a glimpse of the things she enjoys beyond the screen." },
+    { "id": "exploring", "label": "Explorations", "narration": "Curiosity always leads somewhere new. Explore the topics and ideas Vedhika is discovering." },
+    { "id": "contact", "label": "Contact", "narration": "And that's the journey so far. Have an idea or want to connect? Let's talk." }
+  ],
+  "projects": [
+    {
+      "id": "healthcare-ai", "name": "AI Healthcare Treatment Response Recommendation", "category": "AI / Machine Learning", "year": "2026", "image": "/images/orbit-project.png", "alt": "Placeholder concept visual for the AI healthcare treatment response recommendation project", "description": "Full-stack ML web application predicting multi-treatment response feasibility across 6 therapy types.", "tags": ["Flask", "Python", "ML", "REST API"],
+      "challenge": "Comparing treatment response across multiple therapy types usually means consulting several separate models and reports, which slows down clinical decision support.",
+      "approach": "Trained and evaluated 4 ML models — Gradient Boosting, Logistic Regression, MLP Neural Network, and Random Forest — comparing individual accuracy metrics. Supports single and multi-treatment modes across Chemotherapy, Immunotherapy, and Surgical Interventions.",
+      "outcome": "A Flask-based web application with automated PDF clinical report exports via REST APIs, giving comparative model analytics in one place.",
+      "role": "Full-stack development & ML model comparison"
+    },
+    {
+      "id": "food-delivery", "name": "Smart Food Delivery System", "category": "Full-Stack Web", "year": "2026", "image": "/images/pulse-project.png", "alt": "Placeholder concept visual for the smart food delivery system project", "description": "End-to-end full-stack web platform with authentication, menu management, and a conversational AI ordering assistant.", "tags": ["Full-Stack", "MySQL", "AI Chatbot"],
+      "challenge": "Food ordering platforms need to combine secure accounts, live menu management, and fast answers to common customer questions without added friction.",
+      "approach": "Engineered secure session authentication and relational schema management in MySQL, alongside dynamic menu management and an intelligent chatbot interface.",
+      "outcome": "A working platform where the chatbot handles instant menu recommendations, order status queries, and FAQ resolution end to end.",
+      "role": "Full-stack development"
+    },
+    {
+      "id": "route-optimization", "name": "Logistics & Route Optimization System", "category": "Route Optimization", "year": "2026", "image": "/images/protosem-lab.png", "alt": "Placeholder concept visual for the logistics and route optimization project", "description": "Fleet-aware route navigation system combining live traffic and GPS telemetry to prevent delivery delays.", "tags": ["GPS", "Traffic API", "Route Optimization"],
+      "challenge": "Vehicle clustering and unexpected congestion are common causes of delivery delays and rising fuel costs in fleet logistics.",
+      "approach": "Integrated continuous GPS streams with real-time traffic data and implemented a configurable Dynamic Congestion Blocking algorithm that automatically isolates overloaded road segments.",
+      "outcome": "A route optimization system that reduces vehicle clustering, cuts fuel costs, and improves delivery SLA performance.",
+      "role": "System design & route optimization logic"
+    }
+  ],
+  "education": [
+    { "period": "2025 — 2028", "title": "B.E. Computer Science and Engineering", "subtitle": "Kumaraguru College of Technology (KCT)", "description": "Specialising in AI, Machine Learning and Data Science. Currently in 3rd year, Semester V, CGPA 7.9/10. Relevant coursework: OOP, DBMS, Design & Analysis of Algorithms, and programming.", "label": "In progress" },
+    { "period": "Present", "title": "PRICE ProtoSem", "subtitle": "Student Participant", "description": "Industry/startup-oriented programme involving hands-on learning, presentations, teamwork, professional development, technology talks, AI/prompting exposure and retail/industry discussions.", "label": "Learning by doing" },
+    { "period": "Prior", "title": "Higher Secondary & Secondary Education", "subtitle": "Emerald Valley Public School · Cluny Matric Hr. Sec. School", "description": "Grades and years to be added.", "label": "Schooling" }
+  ],
+  "skills": [
+    { "title": "Programming", "description": "Core languages behind the logic.", "items": ["Python", "C", "C++", "Java"] },
+    { "title": "Web Development", "description": "Building for the browser.", "items": ["HTML5", "CSS3", "JavaScript"] },
+    { "title": "Database & Dev Tools", "description": "Where the data and code live.", "items": ["MySQL", "GitHub", "Docker", "VS Code"] },
+    { "title": "Systems & Platforms", "description": "Environments I build and experiment in.", "items": ["Kali Linux", "VirtualBox", "Google Colab", "Obsidian"] },
+    { "title": "Design & Creative Tools", "description": "Clarity, craft, and a feeling that stays.", "items": ["UI/UX Design", "Figma", "Photoshop", "Illustrator", "Blender", "GIMP"] },
+    { "title": "Soft Skills", "description": "The tools that don't show up in a stack.", "items": ["Problem Solving", "Teamwork", "Communication", "Adaptability"] }
+  ],
+  "credentials": [
+    {
+      "title": "AI-ML Virtual Internship",
+      "type": "Internship",
+      "issuer": "AICTE · EduSkills · Google for Developers",
+      "period": "April – June 2025 · 10 weeks",
+      "description": "Completed a 10-week AI-ML Virtual Internship through Kumaraguru College of Technology, supported by the India Edu Program and Google for Developers. Grade: A.",
+      "certificateId": "2c963642bdf5d0040d0a7efea27782ec",
+      "certificates": [
+        { "src": "/certificates/ai-ml-internship.png", "label": "AI-ML Virtual Internship certificate" }
+      ]
+    },
+    {
+      "title": "Web Exploit Hunting and Bug Bounty Virtual Internship",
+      "type": "Internship",
+      "issuer": "EduSkills Academy",
+      "period": "2026 · 8 weeks",
+      "description": "8-week internship credential covering bug bounty fundamentals, vulnerability assessment, reconnaissance techniques, directory listing and SSL/TLS misconfigurations, cookie security, network scanning & enumeration, penetration testing, web application exploitation techniques, and a capstone project.",
+      "certificateId": "2026-A4C6397AAF",
+      "certificates": [
+        { "src": "/certificates/web-exploit-bug-bounty.png", "label": "Web Exploit Hunting and Bug Bounty certificate" }
+      ]
+    },
+    {
+      "title": "Database Management System (Part 1 & 2)",
+      "type": "Certification",
+      "issuer": "Infosys Springboard",
+      "period": "August – October 2025",
+      "description": "Completed Database Management System Part 1 (August 19, 2025) and Part 2 (October 25, 2025) on Infosys Springboard.",
+      "verifyUrl": "https://verify.onwingspan.com",
+      "certificates": [
+        { "src": "/certificates/dbms-part-1.png", "label": "DBMS Part 1 certificate" },
+        { "src": "/certificates/dbms-part-2.png", "label": "DBMS Part 2 certificate" }
+      ]
+    }
+  ],
+  "explorations": [
+    { "title": "AI & Machine Learning", "status": "Exploring", "description": "Understanding how AI and ML can be applied to real-world problems and turned into useful solutions, from healthcare to everyday tools." },
+    { "title": "Data Science", "status": "Exploring", "description": "Working with data-driven applications and practical problem-solving across projects and coursework." },
+    { "title": "Web Exploit Hunting & Cybersecurity", "status": "Explored", "description": "Completed an 8-week internship in bug bounty fundamentals, vulnerability assessment, reconnaissance, and penetration testing." },
+    { "title": "UI/UX & Creative Design", "status": "Explored", "description": "Designing with Figma, Photoshop, Illustrator, Blender and GIMP alongside development work." },
+    { "title": "Full-Stack Web Development", "status": "Explored", "description": "Building complete platforms end to end — authentication, databases, and AI-assisted features included." }
+  ],
+  "hobbies": ["Crochet", "Watching movies", "Reading books"]
+}
