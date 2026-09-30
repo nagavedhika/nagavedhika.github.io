@@ -1,5 +1,5 @@
 {
-  "isSample": true,
+  "isSample": false,
   "title": "The art of figuring it out.",
   "description": "A twenty-week journey from asking better questions to making something real. The messy middle, the small breakthroughs, and everything in between.",
   "galleries": {
@@ -529,8 +529,8 @@
   ],
   "blogs": [
     {
-      "id": "technical-from-prompts-to-prototypes",
-      "title": "Technical // From Prompts to Prototypes",
+      "id": "technical-from-ideas-to-prototypes",
+      "title": "Technical // From Ideas to Prototypes",
       "excerpt": "I went into ProtoSem expecting the technical track to start with a tool. Instead, it started with a warning: don't use technology just because it's available.",
       "category": "Technical",
       "readTime": "6 min read",
