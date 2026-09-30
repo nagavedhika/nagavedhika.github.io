@@ -2,11 +2,22 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { ArrowLeft, ArrowRight, Check, ChevronLeft, ChevronRight, Lightbulb, Printer, Zap } from 'lucide-react'
+import dynamic from 'next/dynamic'
+import { ArrowLeft, ArrowRight, Check, ChevronLeft, ChevronRight, Clock, Lightbulb, Printer, Zap } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import content from '@/content/protosem.json'
+
+const ModelViewer3D = dynamic(() => import('./model-viewer-3d').then((mod) => mod.ModelViewer3D), {
+  ssr: false,
+  loading: () => (
+    <div className="my-7 flex h-[480px] w-full flex-col items-center justify-center gap-3 rounded-2xl border border-primary/20 bg-card/60">
+      <div className="size-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      <span className="text-sm font-medium text-foreground">Initializing 3D Viewer...</span>
+    </div>
+  )
+})
 
 type Phase = keyof typeof content.galleries
 
@@ -84,6 +95,18 @@ function renderStoryParagraph(content: string, key: number) {
     if (match) {
       const [, caption, src] = match
       const isVideo = src.endsWith('.mp4') || src.endsWith('.webm')
+      const is3DModel = src.endsWith('.glb') || src.endsWith('.gltf') || src.endsWith('.stl')
+      if (is3DModel) {
+        return (
+          <ModelViewer3D
+            key={key}
+            src={src}
+            title="Steve Harrington 3D Print Model"
+            subtitle={caption || "Interactive 360° GLB CAD Model · Rotate & Inspect in All Angles"}
+            downloadUrl="/photos/06week/vedhi.stl"
+          />
+        )
+      }
       return (
         <figure key={key} className="my-6 overflow-hidden rounded-2xl border border-border bg-card/70 shadow-md">
           {isVideo ? (
@@ -175,7 +198,7 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
   const displayedFocus = isWeek6
     ? (fabricationTab === 'laser'
         ? ["Laser cutting", "CAD parameter setup", "Digital fabrication", "Precision engraving", "Rapid prototyping"]
-        : ["3D printing", "Slicer preparation", "Filament types", "FDM / SLA technologies", "H2S 3D printer"])
+        : ["3D printing", "Interactive 3D model", "Slicer preparation", "Filament types", "H2S 3D printer"])
     : week?.focus ?? []
 
   const displayedLesson = isWeek6
@@ -188,7 +211,23 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
     <Dialog open={weekNumber !== null} onOpenChange={(open) => { if (!open) onChange(null) }}>
       <DialogContent ref={scrollRef} className="w-[96vw] max-w-[96vw] sm:max-w-[95vw] md:max-w-[94vw] lg:max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1536px] max-h-[94dvh] overflow-y-auto p-6 sm:p-10 md:p-12 lg:p-14">
         {week && <>
-          <DialogHeader className="pr-6"><div className="flex flex-wrap items-center gap-3 pb-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">Week {String(week.number).padStart(2, '0')} / 19</span><Badge variant="outline">{week.phase}</Badge></div><DialogTitle className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">{week.title}</DialogTitle><DialogDescription className="text-sm sm:text-base leading-relaxed text-muted-foreground">{week.summary}</DialogDescription></DialogHeader>
+          <DialogHeader className="pr-6">
+            <div className="flex flex-wrap items-center gap-3 pb-2">
+              <span className="font-mono text-sm uppercase tracking-wider text-primary">Week {String(week.number).padStart(2, '0')} / 19</span>
+              <Badge variant="outline">{week.phase}</Badge>
+              {week.completed ? (
+                <Badge variant="outline" className="gap-1.5 border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">
+                  <Check className="size-3.5 stroke-[2.5]" /> Completed Log
+                </Badge>
+              ) : (
+                <Badge variant="outline" className="gap-1.5 border-border bg-muted/40 text-muted-foreground">
+                  <Clock className="size-3.5" /> Upcoming Chapter · Outline
+                </Badge>
+              )}
+            </div>
+            <DialogTitle className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">{week.title}</DialogTitle>
+            <DialogDescription className="text-sm sm:text-base leading-relaxed text-muted-foreground">{week.summary}</DialogDescription>
+          </DialogHeader>
           {isWeek6 && (
             <div className="mt-4 flex flex-col gap-2.5">
               <div className="flex items-center justify-between">
@@ -223,7 +262,7 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
                   <Printer className={`size-4 ${fabricationTab === '3d' ? 'text-primary' : ''}`} />
                   <span className="flex flex-col items-start text-left sm:flex-row sm:items-center sm:gap-2">
                     <span className="font-semibold">3D Printing</span>
-                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">3 Media</span>
+                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">6 Media (3D Model)</span>
                   </span>
                 </button>
               </div>

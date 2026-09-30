@@ -36,7 +36,16 @@ export function ProtoSemExperience({ initialView }: { initialView?: 'weeks' | 'b
         <Tabs value={view} onValueChange={(value) => { const next = value === 'blogs' ? 'blogs' : 'weeks'; setView(next); router.replace(next === 'blogs' ? '/protosem?view=blogs' : '/protosem', { scroll: false }) }} className="gap-10">
           <TabsList className="grid h-auto! w-full grid-cols-2 rounded-xl border border-border p-1.5">
             <TabsTrigger value="weeks" className="h-auto flex-col items-start gap-4 rounded-lg px-4 py-5 sm:px-7 sm:py-6">
-              <span className="flex w-full items-center justify-between"><CalendarRange className="size-5" /><ArrowUpRight className="size-4" /></span><span className="flex flex-col items-start gap-2"><span className="text-lg font-medium tracking-tight sm:text-2xl">Weekly progression</span><span className="text-left text-sm font-normal leading-relaxed text-muted-foreground">20 chapters. One evolving idea.</span></span>
+              <span className="flex w-full items-center justify-between">
+                <CalendarRange className="size-5" />
+                <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
+                  7 / 20 Completed
+                </span>
+              </span>
+              <span className="flex flex-col items-start gap-2">
+                <span className="text-lg font-medium tracking-tight sm:text-2xl">Weekly progression</span>
+                <span className="text-left text-sm font-normal leading-relaxed text-muted-foreground">20 chapters · Weeks 00–06 documented with logs &amp; media</span>
+              </span>
             </TabsTrigger>
             <TabsTrigger value="blogs" className="h-auto flex-col items-start gap-4 rounded-lg px-4 py-5 sm:px-7 sm:py-6">
               <span className="flex w-full items-center justify-between"><BookOpen className="size-5" /><ArrowUpRight className="size-4" /></span><span className="flex flex-col items-start gap-2"><span className="text-lg font-medium tracking-tight sm:text-2xl">Blogs</span><span className="text-left text-sm font-normal leading-relaxed text-muted-foreground">Thoughts beyond the workbench.</span></span>

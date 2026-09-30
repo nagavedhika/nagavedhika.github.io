@@ -92,7 +92,9 @@
         "Final Reflection: “ProtoSem didn't just teach us new concepts. It taught us how different people can connect, think differently, and create together.” Week 0 laid the foundation for everything that followed. Before learning how to build solutions, we first learned how to connect, observe, understand, collaborate, and think with purpose."
       ],
       "gallery": [],
-      "lesson": "ProtoSem didn't just teach us new concepts. It taught us how different people can connect, think differently, and create together."
+      "lesson": "ProtoSem didn't just teach us new concepts. It taught us how different people can connect, think differently, and create together.",
+      "completed": true,
+      "status": "completed"
     },
     {
       "number": 1,
@@ -124,7 +126,9 @@
         "Final Reflection: “Week 1 taught us to look at problems from more than one angle — understanding the user, the technology, the data, the business, and the industry before thinking about a solution.” Week 1 helped us move from simply observing problems to understanding the different perspectives and frameworks that can be used to analyze them."
       ],
       "gallery": [],
-      "lesson": "Week 1 taught us to look at problems from more than one angle — understanding the user, the technology, the data, the business, and the industry before thinking about a solution."
+      "lesson": "Week 1 taught us to look at problems from more than one angle — understanding the user, the technology, the data, the business, and the industry before thinking about a solution.",
+      "completed": true,
+      "status": "completed"
     },
     {
       "number": 2,
@@ -149,7 +153,9 @@
         "What We Took Away: 01 — Problem Definition. Learned to understand and clearly frame a problem before developing a solution. 02 — Logical Thinking. Used algorithms to break problems into manageable, sequential steps. 03 — Visual Representation. Used flowcharts to communicate and understand the logic of a solution. 04 — Programming Fundamentals. Explored Scratch as an accessible way to convert logical thinking into programs. 05 — Technology & Application. Continued connecting problem-solving concepts with practical technology tools.",
         "Final Reflection: “Week 2 taught us that solving a problem is not about jumping directly to a solution. It is about understanding the problem, thinking logically, planning the steps, and then turning that plan into something that works.”"
       ],
-      "lesson": "Week 2 taught us that solving a problem is not about jumping directly to a solution. It is about understanding the problem, thinking logically, planning the steps, and then turning that plan into something that works."
+      "lesson": "Week 2 taught us that solving a problem is not about jumping directly to a solution. It is about understanding the problem, thinking logically, planning the steps, and then turning that plan into something that works.",
+      "completed": true,
+      "status": "completed"
     },
     {
       "number": 3,
@@ -177,7 +183,9 @@
         "![Day 5 — Perfboard circuit prototyping with LED indicator, resistor, and tactile switch](/photos/03week/WhatsApp Image 2026-09-29 at 9.52.55 PM.jpeg)"
       ],
       "gallery": [],
-      "lesson": "Week 3 bridged systems and physical computing — from configuring operating systems and deploying terminal applications to building our first practical electronic circuits."
+      "lesson": "Week 3 bridged systems and physical computing — from configuring operating systems and deploying terminal applications to building our first practical electronic circuits.",
+      "completed": true,
+      "status": "completed"
     },
     {
       "number": 4,
@@ -206,7 +214,9 @@
         "![Day 5 — Assembling joystick breadboard circuitry and hardware testing at the workbench](/photos/04week/WhatsApp Image 2026-09-29 at 9.55.59 PM.jpeg)"
       ],
       "gallery": [],
-      "lesson": "An embedded system bridges logic and reality — software gives the hardware a mind, and sensors give it senses."
+      "lesson": "An embedded system bridges logic and reality — software gives the hardware a mind, and sensors give it senses.",
+      "completed": true,
+      "status": "completed"
     },
     {
       "number": 5,
@@ -229,7 +239,9 @@
         "Day 4 — Solution Development & UI/UX Refinement. We continued developing our solution based on the validated problem statement and refined the Figma designs. We worked on improving the overall user flow, interface structure, visual elements, and usability of the proposed system.",
         "Day 5 — Solution Submission & Presentation. We finalized our problem statement, research findings, and UI/UX design. The completed solution concept and Figma prototype were submitted as the outcome of the week's work, marking the transition from problem identification and research toward solution development."
       ],
-      "lesson": "A meaningful solution starts with listening — validating real user needs through research and clear UI/UX design before building the final product."
+      "lesson": "A meaningful solution starts with listening — validating real user needs through research and clear UI/UX design before building the final product.",
+      "completed": true,
+      "status": "completed"
     },
     {
       "number": 6,
@@ -275,8 +287,10 @@
         "## What is 3D Printing?",
         "3D printing is an additive manufacturing process in which a physical three-dimensional object is created by building material layer by layer from a digital 3D model. Unlike traditional manufacturing, which often removes material from a larger block, 3D printing adds material only where it is required.",
         "## 3D Printing Process",
+        "![3D Printing Process — From a digital model to a physical object layer by layer (8-step additive manufacturing pipeline)](/photos/06week/3d-printing-process.jpg)",
         "**3D Model Creation** — A model is designed using software such as Fusion 360 or obtained from an online 3D model repository.",
         "**Model Export** — The model is exported in a suitable format, commonly STL or 3MF.",
+        "![Interactive 360° CAD Model — Steve Harrington Figurine (drag to rotate, scroll to zoom)](/photos/06week/vedhi.glb)",
         "**Slicing** — Slicing software converts the 3D model into individual layers and generates machine instructions, commonly in the form of G-code.",
         "![3D CAD model on the slicer build plate ready for layer generation](/photos/06week/new/WhatsApp Image 2026-09-30 at 9.24.20 AM.jpeg)",
         "**Print Configuration** — Settings such as layer height, infill, temperature, print speed, and support structures are configured.",
@@ -290,6 +304,7 @@
         "## Disadvantages & Considerations",
         "* Printing can be slow for large objects\n* Surface quality may require post-processing\n* Mechanical properties can vary depending on print orientation\n* Some materials require controlled printing conditions\n* Support structures may be required\n* Large industrial printers can be expensive\n* Dimensional accuracy depends on the printer and print settings",
         "## Types of 3D Printing",
+        "![Types of 3D Printing Technologies — FDM, SLA, MSLA, SLS, and SLM Comparison Overview](/photos/06week/types-of-3d-printing.jpg)",
         "**FDM / FFF (Fused Deposition Modeling)** — A heated nozzle melts thermoplastic filament and deposits it layer by layer. Common materials include PLA, ABS, PETG, TPU, and Nylon.",
         "**SLA (Stereolithography)** — Uses a light source to selectively cure liquid photopolymer resin layer by layer. It provides high detail and smooth surfaces.",
         "**MSLA / LCD Resin Printing** — Uses a UV light source and an LCD masking system to cure an entire layer of resin at once.",
@@ -316,7 +331,9 @@
         "3D Model → STL / 3MF → Slicing → G-code → Filament Loading → Bed Preparation → Layer-by-Layer Printing → Support Removal → Finished Object"
       ],
       "gallery": [],
-      "lesson": "Digital fabrication bridges software design and physical reality — mastering machine parameters, material constraints, and fabrication tolerances turns digital models into durable physical products."
+      "lesson": "Digital fabrication bridges software design and physical reality — mastering machine parameters, material constraints, and fabrication tolerances turns digital models into durable physical products.",
+      "completed": true,
+      "status": "completed"
     },
     {
       "number": 7,
@@ -332,7 +349,9 @@
         "The selected concept is broken into functional parts: sensing, processing, feedback, and power. A block diagram documents the interfaces between these parts and highlights where failure could propagate.",
         "Candidate components are compared using their actual constraints, including voltage requirements, communication protocols, and physical size. The highest-risk integration is prioritized for an early bench test."
       ],
-      "lesson": "The space between components deserves as much attention as the components themselves."
+      "lesson": "The space between components deserves as much attention as the components themselves.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 8,
@@ -348,7 +367,9 @@
         "Assembly starts with a minimal circuit and verified power rails. One component is introduced at a time, with basic checks recorded before the system grows more complicated.",
         "A sensor reading becomes the first end-to-end signal. Unstable results are treated as evidence to investigate rather than something to smooth away immediately. Connections, sampling intervals, and environmental conditions are checked in turn."
       ],
-      "lesson": "A smaller working system is easier to understand than a larger mysterious one."
+      "lesson": "A smaller working system is easier to understand than a larger mysterious one.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 9,
@@ -364,7 +385,9 @@
         "The sample firmware separates input collection, decision logic, and output updates. Explicit states make startup, normal operation, and sensor failure observable instead of implicit.",
         "Test inputs are used to check transitions without relying on unpredictable real-world conditions. Clear fallback behavior is designed for disconnected components and invalid readings so the prototype does not imply confidence it does not have."
       ],
-      "lesson": "Good behavior includes what happens when the expected input never arrives."
+      "lesson": "Good behavior includes what happens when the expected input never arrives.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 10,
@@ -380,7 +403,9 @@
         "The enclosure is modeled around the actual components and their interfaces. Openings, fastening points, and access for assembly are considered before visual refinement.",
         "A first print is used to check fit rather than prove that the design is finished. Tolerances, sensor exposure, cable paths, and the visibility of feedback all become practical inputs to the next revision."
       ],
-      "lesson": "A beautiful enclosure still has to open, fit, connect, and be understood."
+      "lesson": "A beautiful enclosure still has to open, fit, connect, and be understood.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 11,
@@ -396,7 +421,9 @@
         "Hardware, firmware, and the physical enclosure are brought together for a full task walkthrough. The focus is not simply whether each part works, but whether the experience remains coherent when they work together.",
         "Issues are logged with reproduction steps, expected behavior, and observed behavior. A short integration checklist makes each revision easier to evaluate and prevents a fixed problem from quietly returning."
       ],
-      "lesson": "Integration is its own design activity, not the last step after design."
+      "lesson": "Integration is its own design activity, not the last step after design.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 12,
@@ -412,7 +439,9 @@
         "Test sessions give participants a realistic task without explaining the intended interaction first. The facilitator watches for hesitation, repeated actions, and interpretations that differ from the design assumptions.",
         "Feedback is separated into observed behavior, participant comments, and proposed solutions. This keeps the team from implementing every suggestion without understanding the underlying difficulty."
       ],
-      "lesson": "If you have to explain the interface, you have learned something about the interface."
+      "lesson": "If you have to explain the interface, you have learned something about the interface.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 13,
@@ -428,7 +457,9 @@
         "The observed issues are ranked by their effect on the core task. Ambiguous status feedback and unclear recovery paths take priority over cosmetic inconsistencies.",
         "A focused revision changes only a small set of related behaviors. The previous test tasks are repeated so that a promising improvement is checked against the same criteria rather than judged from memory."
       ],
-      "lesson": "Iteration is most useful when you can explain what changed and why."
+      "lesson": "Iteration is most useful when you can explain what changed and why.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 14,
@@ -444,7 +475,9 @@
         "A companion interface explores how to display current conditions and recent changes without implying false precision. Clear labels explain the meaning and freshness of each reading.",
         "Color is supported by text and shape so it is not the only source of information. Loading, empty, and disconnected states are designed with the same care as the normal dashboard."
       ],
-      "lesson": "Useful information includes enough context to interpret it correctly."
+      "lesson": "Useful information includes enough context to interpret it correctly.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 15,
@@ -460,7 +493,9 @@
         "The prototype is tested through deliberate interruptions: power cycling, sensor disconnection, and invalid input. Each case records whether the system detects the issue and how it communicates recovery.",
         "Limitations are documented rather than hidden. A simple test matrix distinguishes repeatable behavior from observations that still require longer-term validation, keeping the claims proportionate to the evidence."
       ],
-      "lesson": "Reliability begins with an honest understanding of the boundaries."
+      "lesson": "Reliability begins with an honest understanding of the boundaries.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 16,
@@ -476,7 +511,9 @@
         "The demonstration is organized around one understandable scenario. A setup checklist, known initial state, and fallback plan reduce the chance that incidental setup problems obscure the work.",
         "The narrative introduces the user need before the technology. Each demonstrated feature is connected to a specific problem so the audience can evaluate its purpose, not just its technical novelty."
       ],
-      "lesson": "A good demo makes the value visible before it makes the technology impressive."
+      "lesson": "A good demo makes the value visible before it makes the technology impressive.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 17,
@@ -492,7 +529,9 @@
         "Research notes, sketches, test observations, and revisions are assembled into a case study. The structure follows the decisions that shaped the work rather than presenting a frictionless sequence of successes.",
         "Images receive useful captions, evidence is distinguished from interpretation, and unfinished questions remain visible. The documentation aims to help someone understand and continue the project."
       ],
-      "lesson": "The decisions behind the artifact are part of the artifact's value."
+      "lesson": "The decisions behind the artifact are part of the artifact's value.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 18,
@@ -508,7 +547,9 @@
         "A practice presentation invites critique of both the prototype and the claims made about it. Reviewers are encouraged to identify unclear reasoning, unsupported conclusions, and practical gaps.",
         "The final revisions prioritize clarity and accuracy. The team prepares direct answers about what was tested, what remains a concept, and what further evidence would be needed before real-world deployment."
       ],
-      "lesson": "Credible work is comfortable explaining its limitations."
+      "lesson": "Credible work is comfortable explaining its limitations.",
+      "completed": false,
+      "status": "upcoming"
     },
     {
       "number": 19,
@@ -524,7 +565,9 @@
         "The final sample week brings the prototype, process documentation, and learning journal together. The outcome is evaluated against the original brief, with the project's evolution made explicit.",
         "A reflection identifies the habits worth carrying forward: asking better questions, making smaller tests, preserving evidence, and listening without defending. The next steps are deliberately modest and grounded in what the journey actually revealed."
       ],
-      "lesson": "The most lasting outcome is a better way to approach the next unknown."
+      "lesson": "The most lasting outcome is a better way to approach the next unknown.",
+      "completed": false,
+      "status": "upcoming"
     }
   ],
   "blogs": [
