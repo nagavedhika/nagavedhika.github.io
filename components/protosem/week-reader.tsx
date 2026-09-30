@@ -135,7 +135,8 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
   const [imageIndex, setImageIndex] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
   const week = content.weeks.find((week) => week.number === weekNumber)
-  const gallery = week ? week.gallery ?? content.galleries[week.phase as Phase] : []
+  const isWeek6 = week?.number === 6
+  const gallery = (!isWeek6 && week) ? week.gallery ?? content.galleries[week.phase as Phase] ?? [] : []
   const image = gallery[imageIndex] ?? gallery[0]
   useEffect(() => { setImageIndex(0); scrollRef.current?.scrollTo({ top: 0 }) }, [weekNumber])
 
@@ -147,7 +148,8 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
       <DialogContent ref={scrollRef} className="max-h-[90dvh] overflow-y-auto p-6 sm:max-w-3xl md:p-8">
         {week && <>
           <DialogHeader className="pr-6"><div className="flex flex-wrap items-center gap-3 pb-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">Week {String(week.number).padStart(2, '0')} / 19</span><Badge variant="outline">{week.phase}</Badge></div><DialogTitle>{week.title}</DialogTitle><DialogDescription>{week.summary}</DialogDescription></DialogHeader>
-          <div className="flex flex-col gap-3 pt-3">
+          {!isWeek6 && gallery.length > 0 && (
+            <div className="flex flex-col gap-3 pt-3">
             {isVideo ? (
               <div className="relative aspect-video overflow-hidden rounded-lg bg-black">
                 <video
@@ -248,6 +250,7 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
             )}
             <p className="text-sm text-muted-foreground">{week.gallery ? `Week ${week.number} documentation gallery (${gallery.length} ${hasVideo ? 'photos & videos' : 'photos'})` : `Illustrative concept gallery · Replace with your Week ${week.number} photographs.`}</p>
           </div>
+        )}
           <div className="reading-copy py-5"><h3>This week&apos;s focus</h3><ul className="flex flex-wrap gap-x-5 gap-y-3">{week.focus.map((focus) => <li key={focus} className="flex items-center gap-2 text-sm text-muted-foreground"><Check className="size-4 text-primary" />{focus}</li>)}</ul><h3>Inside the process</h3>{week.story.map((paragraph, index) => renderStoryParagraph(paragraph, index))}<div className="flex items-start gap-4 rounded-xl border border-primary/20 bg-primary/5 p-5 text-foreground"><Lightbulb className="mt-1 size-5 shrink-0 text-primary" /><div className="flex flex-col gap-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">The takeaway</span><p>{week.lesson}</p></div></div></div>
           <div className="flex items-center justify-between border-t border-border pt-4"><Button variant="outline" disabled={week.number === 0} onClick={() => onChange(week.number - 1)}><ArrowLeft data-icon="inline-start" />Previous week</Button><Button variant="outline" disabled={week.number === 19} onClick={() => onChange(week.number + 1)}>Next week<ArrowRight data-icon="inline-end" /></Button></div>
         </>}

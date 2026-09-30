@@ -324,9 +324,11 @@
         "**Material Placement** — The material is positioned correctly on the laser cutting bed.",
         "**Laser Focusing** — The laser head is adjusted to the correct focal distance for the selected material.",
         "**Testing** — A small test cut or engraving is performed to verify the selected parameters.",
-        "**Cutting or Engraving** — The machine follows the digital design and uses the laser to cut or engrave the material.",
-        "**Finishing** — The finished pieces are removed from the machine and cleaned or finished if required.",
         "![Operating the industrial laser cutting machine at FabLab Forge](/photos/06week/WhatsApp Image 2026-09-30 at 9.14.54 AM.jpeg)",
+        "**Cutting or Engraving** — The machine follows the digital design and uses the laser to cut or engrave the material.",
+        "![Laser cutting process in action on the honeycomb bed](/photos/06week/WhatsApp Video 2026-09-29 at 10.53.46 PM (2).mp4)",
+        "**Finishing** — The finished pieces are removed from the machine and cleaned or finished if required.",
+        "![Precision laser cutting & engraving on black acrylic](/photos/06week/WhatsApp Image 2026-09-29 at 10.53.52 PM.jpeg)",
         "## Advantages of Laser Cutting",
         "* High precision and accuracy\n* Produces complex shapes easily\n* Fast for many 2D fabrication tasks\n* Minimal physical contact with the material\n* Suitable for both cutting and engraving\n* Digital designs can be easily modified\n* Good repeatability\n* Produces detailed cuts and engravings",
         "## Disadvantages & Considerations",
@@ -347,6 +349,7 @@
         "**Filament Loading** — The required printing material is loaded into the printer.",
         "**Bed Preparation** — The print bed is cleaned and leveled or calibrated.",
         "**Printing** — The printer deposits or cures the material layer by layer to create the physical object.",
+        "![Bambu Lab 3D printer depositing filament layer by layer](/photos/06week/WhatsApp Video 2026-09-29 at 10.54.45 PM.mp4)",
         "**Post-Processing** — Supports are removed and the finished object may be cleaned, sanded, or otherwise processed.",
         "## Advantages of 3D Printing",
         "* Can produce complex geometries\n* Useful for rapid prototyping\n* Reduces material waste in many applications\n* Allows easy design modifications\n* Supports customization and personalization\n* Useful for prototypes and educational projects\n* Can produce functional parts\n* Suitable for small-batch production",
@@ -372,39 +375,13 @@
         "* Nozzle temperature & bed temperature\n* Printing speed & layer height\n* Tensile strength & impact resistance\n* Flexibility & rigidity balance\n* Thermal resistance & heat deflection\n* Moisture sensitivity & storage\n* Warping tendency\n* Environmental & UV resistance",
         "# H2S 3D Printer",
         "If the H2S machine refers to the 3D printer available at the Forge laboratory, the exact specifications should be verified from the machine's model number or specification sheet.",
-        "![Configuring 3D print job on the touchscreen panel](/photos/06week/WhatsApp Image 2026-09-30 at 9.14.41 AM.jpeg)",
+        "![Configuring 3D print job on the touchscreen panel with AMS unit](/photos/06week/WhatsApp Image 2026-09-30 at 9.14.41 AM.jpeg)",
         "## H2S Machine Specifications",
         "| Specification | Details |\n| Machine / Model | H2S 3D Printer |\n| Technology | FDM / FFF (verify) |\n| Printing Material | Thermoplastic filament |\n| Filament Diameter | 1.75 mm (verify) |\n| Nozzle Diameter | To be verified |\n| Build Volume | To be verified |\n| Layer Resolution | To be verified |\n| Nozzle Temperature | To be verified |\n| Build Plate Temperature | To be verified |\n| Maximum Print Speed | To be verified |\n| Supported Filaments | To be verified |\n| File Format | STL / 3MF / G-code |\n| Connectivity | To be verified |",
         "## Basic Working of the H2S Printer",
         "3D Model → STL / 3MF → Slicing → G-code → Filament Loading → Bed Preparation → Layer-by-Layer Printing → Support Removal → Finished Object"
       ],
-      "gallery": [
-        {
-          "src": "/photos/06week/WhatsApp Image 2026-09-30 at 9.14.54 AM.jpeg",
-          "alt": "Vedhika operating the industrial laser cutting machine at FabLab Coimbatore inside Forge",
-          "caption": "Operating the laser cutting machine at FabLab Forge"
-        },
-        {
-          "src": "/photos/06week/WhatsApp Image 2026-09-29 at 10.53.52 PM.jpeg",
-          "alt": "Laser cutter head engraving custom typography and profile on black acrylic at Forge",
-          "caption": "Precision laser cutting & engraving on acrylic"
-        },
-        {
-          "src": "/photos/06week/WhatsApp Video 2026-09-29 at 10.53.46 PM (2).mp4",
-          "alt": "Video showing real-time laser cutting and profile fabrication on the honeycomb bed",
-          "caption": "Laser cutting process in action at Forge"
-        },
-        {
-          "src": "/photos/06week/WhatsApp Image 2026-09-30 at 9.14.41 AM.jpeg",
-          "alt": "Vedhika configuring print parameters on the 3D printer touchscreen control panel with AMS unit",
-          "caption": "Configuring 3D print job on the touchscreen panel"
-        },
-        {
-          "src": "/photos/06week/WhatsApp Video 2026-09-29 at 10.54.45 PM.mp4",
-          "alt": "Video showing Bambu Lab 3D printer depositing filament layer by layer inside the enclosure",
-          "caption": "Bambu Lab 3D printing physical prototype"
-        }
-      ],
+      "gallery": [],
       "lesson": "Digital fabrication bridges software design and physical reality — mastering machine parameters, material constraints, and fabrication tolerances turns digital models into durable physical products."
     },
     {
