@@ -97,13 +97,14 @@ function renderStoryParagraph(content: string, key: number) {
               />
             </div>
           ) : (
-            <div className="relative aspect-video w-full overflow-hidden bg-muted/20">
+            <div className="relative flex w-full items-center justify-center overflow-hidden bg-muted/15 p-2 sm:p-4">
               <Image
                 src={src}
                 alt={caption || 'Lab photograph'}
-                fill
-                sizes="(max-width: 768px) 100vw, 750px"
-                className="object-cover"
+                width={1200}
+                height={900}
+                className="h-auto max-h-[600px] w-auto max-w-full rounded-lg object-contain shadow-sm"
+                unoptimized
               />
             </div>
           )}
