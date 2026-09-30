@@ -85,7 +85,7 @@ function renderStoryParagraph(content: string, key: number) {
       const [, caption, src] = match
       const isVideo = src.endsWith('.mp4') || src.endsWith('.webm')
       return (
-        <figure key={key} className="my-5 overflow-hidden rounded-xl border border-border bg-card/60 shadow-sm">
+        <figure key={key} className="my-6 overflow-hidden rounded-2xl border border-border bg-card/70 shadow-md">
           {isVideo ? (
             <div className="relative aspect-video w-full bg-black">
               <video
@@ -97,20 +97,20 @@ function renderStoryParagraph(content: string, key: number) {
               />
             </div>
           ) : (
-            <div className="relative flex w-full items-center justify-center overflow-hidden bg-muted/15 p-2 sm:p-4">
+            <div className="relative flex w-full items-center justify-center overflow-hidden bg-muted/15 p-2 sm:p-5 md:p-6">
               <Image
                 src={src}
                 alt={caption || 'Lab photograph'}
-                width={1200}
-                height={900}
-                className="h-auto max-h-[600px] w-auto max-w-full rounded-lg object-contain shadow-sm"
+                width={1600}
+                height={1200}
+                className="h-auto max-h-[680px] w-auto max-w-full rounded-xl object-contain shadow-sm"
                 unoptimized
               />
             </div>
           )}
           {caption && (
-            <figcaption className="flex items-center gap-2 border-t border-border/70 bg-muted/30 px-4 py-2 text-xs text-muted-foreground">
-              <span className="size-1.5 shrink-0 rounded-full bg-primary" />
+            <figcaption className="flex items-center gap-2.5 border-t border-border/70 bg-muted/30 px-5 py-3 text-xs sm:text-sm text-muted-foreground">
+              <span className="size-2 shrink-0 rounded-full bg-primary" />
               <span className="font-medium text-foreground/90">{caption}</span>
             </figcaption>
           )}
@@ -119,17 +119,32 @@ function renderStoryParagraph(content: string, key: number) {
     }
   }
 
+  const dayMatch = content.match(/^(Day \d+\s*[—–-]\s*[^.]+?\.)\s*(.*)$/)
+  if (dayMatch) {
+    return (
+      <div key={key} className="rounded-xl border border-border/50 bg-card/40 p-4 sm:p-5">
+        <h5 className="mb-2 flex items-center gap-2 text-base font-semibold tracking-tight text-foreground sm:text-lg">
+          <span className="inline-block size-2 rounded-full bg-primary" />
+          {dayMatch[1]}
+        </h5>
+        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {dayMatch[2]}
+        </p>
+      </div>
+    )
+  }
+
   if (content.startsWith('**') && content.includes('**')) {
     const parts = content.split('**')
     return (
-      <p key={key} className="text-sm leading-relaxed text-muted-foreground">
-        <strong className="font-medium text-foreground">{parts[1]}</strong>
+      <p key={key} className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+        <strong className="font-semibold text-foreground">{parts[1]}</strong>
         {parts.slice(2).join('**')}
       </p>
     )
   }
 
-  return <p key={key} className="text-sm leading-relaxed text-muted-foreground">{content}</p>
+  return <p key={key} className="text-sm leading-relaxed text-muted-foreground sm:text-base">{content}</p>
 }
 
 export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null; onChange: (number: number | null) => void }) {
@@ -138,7 +153,8 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
   const scrollRef = useRef<HTMLDivElement>(null)
   const week = content.weeks.find((week) => week.number === weekNumber)
   const isWeek6 = week?.number === 6
-  const gallery = (!isWeek6 && week) ? week.gallery ?? content.galleries[week.phase as Phase] ?? [] : []
+  const hasInlineMedia = week?.story.some((s) => s.startsWith('![')) ?? false
+  const gallery = (!isWeek6 && !hasInlineMedia && week) ? (week.gallery && week.gallery.length > 0 ? week.gallery : content.galleries[week.phase as Phase] ?? []) : []
   const image = gallery[imageIndex] ?? gallery[0]
 
   useEffect(() => {
@@ -170,7 +186,7 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
 
   return (
     <Dialog open={weekNumber !== null} onOpenChange={(open) => { if (!open) onChange(null) }}>
-      <DialogContent ref={scrollRef} className="w-[95vw] sm:max-w-4xl md:max-w-5xl lg:max-w-6xl max-h-[92dvh] overflow-y-auto p-6 sm:p-8 md:p-10">
+      <DialogContent ref={scrollRef} className="w-[96vw] max-w-[96vw] sm:max-w-[95vw] md:max-w-[94vw] lg:max-w-7xl xl:max-w-[1440px] 2xl:max-w-[1536px] max-h-[94dvh] overflow-y-auto p-6 sm:p-10 md:p-12 lg:p-14">
         {week && <>
           <DialogHeader className="pr-6"><div className="flex flex-wrap items-center gap-3 pb-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">Week {String(week.number).padStart(2, '0')} / 19</span><Badge variant="outline">{week.phase}</Badge></div><DialogTitle className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">{week.title}</DialogTitle><DialogDescription className="text-sm sm:text-base leading-relaxed text-muted-foreground">{week.summary}</DialogDescription></DialogHeader>
           {isWeek6 && (
@@ -213,7 +229,7 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
               </div>
             </div>
           )}
-          {!isWeek6 && gallery.length > 0 && (
+          {!isWeek6 && !hasInlineMedia && gallery.length > 0 && (
             <div className="flex flex-col gap-3 pt-3">
             {isVideo ? (
               <div className="relative aspect-video overflow-hidden rounded-lg bg-black">
