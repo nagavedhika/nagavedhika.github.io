@@ -58,7 +58,7 @@ function renderStoryParagraph(content: string, key: number) {
   if (content.startsWith('* ') || content.includes('\n* ')) {
     const items = content.split('\n').map((l) => l.trim()).filter((l) => l.startsWith('* ')).map((l) => l.slice(2))
     return (
-      <ul key={key} className="my-2 grid gap-1.5 sm:grid-cols-2">
+      <ul key={key} className="my-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, idx) => (
           <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
             <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
@@ -170,9 +170,9 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
 
   return (
     <Dialog open={weekNumber !== null} onOpenChange={(open) => { if (!open) onChange(null) }}>
-      <DialogContent ref={scrollRef} className="max-h-[90dvh] overflow-y-auto p-6 sm:max-w-3xl md:p-8">
+      <DialogContent ref={scrollRef} className="w-[95vw] sm:max-w-4xl md:max-w-5xl lg:max-w-6xl max-h-[92dvh] overflow-y-auto p-6 sm:p-8 md:p-10">
         {week && <>
-          <DialogHeader className="pr-6"><div className="flex flex-wrap items-center gap-3 pb-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">Week {String(week.number).padStart(2, '0')} / 19</span><Badge variant="outline">{week.phase}</Badge></div><DialogTitle>{week.title}</DialogTitle><DialogDescription>{week.summary}</DialogDescription></DialogHeader>
+          <DialogHeader className="pr-6"><div className="flex flex-wrap items-center gap-3 pb-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">Week {String(week.number).padStart(2, '0')} / 19</span><Badge variant="outline">{week.phase}</Badge></div><DialogTitle className="text-2xl sm:text-3xl font-medium tracking-tight text-foreground">{week.title}</DialogTitle><DialogDescription className="text-sm sm:text-base leading-relaxed text-muted-foreground">{week.summary}</DialogDescription></DialogHeader>
           {isWeek6 && (
             <div className="mt-4 flex flex-col gap-2.5">
               <div className="flex items-center justify-between">
