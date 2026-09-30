@@ -79,6 +79,45 @@ function renderStoryParagraph(content: string, key: number) {
     return <h5 key={key} className="mt-3 text-sm font-semibold uppercase tracking-wider text-foreground">{content.replace(/^###\s+/, '')}</h5>
   }
 
+  if (content.startsWith('![') && content.includes('](')) {
+    const match = content.match(/^!\[(.*?)\]\((.*?)\)$/)
+    if (match) {
+      const [, caption, src] = match
+      const isVideo = src.endsWith('.mp4') || src.endsWith('.webm')
+      return (
+        <figure key={key} className="my-5 overflow-hidden rounded-xl border border-border bg-card/60 shadow-sm">
+          {isVideo ? (
+            <div className="relative aspect-video w-full bg-black">
+              <video
+                src={src}
+                controls
+                playsInline
+                preload="metadata"
+                className="h-full w-full object-contain"
+              />
+            </div>
+          ) : (
+            <div className="relative aspect-video w-full overflow-hidden bg-muted/20">
+              <Image
+                src={src}
+                alt={caption || 'Lab photograph'}
+                fill
+                sizes="(max-width: 768px) 100vw, 750px"
+                className="object-cover"
+              />
+            </div>
+          )}
+          {caption && (
+            <figcaption className="flex items-center gap-2 border-t border-border/70 bg-muted/30 px-4 py-2 text-xs text-muted-foreground">
+              <span className="size-1.5 shrink-0 rounded-full bg-primary" />
+              <span className="font-medium text-foreground/90">{caption}</span>
+            </figcaption>
+          )}
+        </figure>
+      )
+    }
+  }
+
   if (content.startsWith('**') && content.includes('**')) {
     const parts = content.split('**')
     return (
@@ -165,6 +204,46 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
                     </button>
                   </div>
                 </div>
+              </div>
+            )}
+            {gallery.length > 1 && (
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-0.5">
+                {gallery.map((item, idx) => {
+                  const isItemVideo = item.src?.endsWith('.mp4') || item.src?.endsWith('.webm')
+                  const isSelected = idx === imageIndex
+                  return (
+                    <button
+                      key={item.src + idx}
+                      type="button"
+                      onClick={() => setImageIndex(idx)}
+                      aria-label={`View media ${idx + 1}: ${item.caption || item.alt}`}
+                      className={`group relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border text-left transition-all ${
+                        isSelected
+                          ? 'border-primary ring-2 ring-primary ring-offset-2 ring-offset-background opacity-100'
+                          : 'border-border/70 opacity-60 hover:opacity-100 hover:border-muted-foreground'
+                      }`}
+                    >
+                      {isItemVideo ? (
+                        <div className="flex h-full w-full items-center justify-center bg-black/80">
+                          <span className="rounded bg-primary/80 px-1 py-0.5 text-[9px] font-mono font-semibold uppercase text-primary-foreground">
+                            Video
+                          </span>
+                        </div>
+                      ) : (
+                        <Image
+                          src={item.src}
+                          alt={item.caption || item.alt}
+                          fill
+                          sizes="96px"
+                          className="object-cover"
+                        />
+                      )}
+                      <span className="absolute bottom-1 right-1 rounded bg-black/70 px-1 font-mono text-[9px] font-medium text-white">
+                        {idx + 1}
+                      </span>
+                    </button>
+                  )
+                })}
               </div>
             )}
             <p className="text-sm text-muted-foreground">{week.gallery ? `Week ${week.number} documentation gallery (${gallery.length} ${hasVideo ? 'photos & videos' : 'photos'})` : `Illustrative concept gallery · Replace with your Week ${week.number} photographs.`}</p>
