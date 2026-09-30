@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { ArrowLeft, ArrowRight, Check, ChevronLeft, ChevronRight, Lightbulb } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, ChevronLeft, ChevronRight, Lightbulb, Printer, Zap } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -133,21 +133,85 @@ function renderStoryParagraph(content: string, key: number) {
 
 export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null; onChange: (number: number | null) => void }) {
   const [imageIndex, setImageIndex] = useState(0)
+  const [fabricationTab, setFabricationTab] = useState<'laser' | '3d'>('laser')
   const scrollRef = useRef<HTMLDivElement>(null)
   const week = content.weeks.find((week) => week.number === weekNumber)
   const isWeek6 = week?.number === 6
   const gallery = (!isWeek6 && week) ? week.gallery ?? content.galleries[week.phase as Phase] ?? [] : []
   const image = gallery[imageIndex] ?? gallery[0]
-  useEffect(() => { setImageIndex(0); scrollRef.current?.scrollTo({ top: 0 }) }, [weekNumber])
+
+  useEffect(() => {
+    setImageIndex(0)
+    setFabricationTab('laser')
+    scrollRef.current?.scrollTo({ top: 0 })
+  }, [weekNumber])
 
   const isVideo = image?.src?.endsWith('.mp4') || image?.src?.endsWith('.webm')
   const hasVideo = gallery.some((item) => item.src?.endsWith('.mp4') || item.src?.endsWith('.webm'))
+
+  // Split Week 06 story between Laser Cutting and 3D Printing
+  const printStartIndex = week?.story.findIndex((s) => s === '# 3D Printing') ?? -1
+  const displayedStory = isWeek6 && printStartIndex !== -1
+    ? (fabricationTab === 'laser' ? week.story.slice(0, printStartIndex) : week.story.slice(printStartIndex))
+    : week?.story ?? []
+
+  const displayedFocus = isWeek6
+    ? (fabricationTab === 'laser'
+        ? ["Laser cutting", "CAD parameter setup", "Digital fabrication", "Precision engraving", "Rapid prototyping"]
+        : ["3D printing", "Slicer preparation", "Filament types", "FDM / SLA technologies", "H2S 3D printer"])
+    : week?.focus ?? []
+
+  const displayedLesson = isWeek6
+    ? (fabricationTab === 'laser'
+        ? "Precision laser cutting converts digital vector contours into physically exact parts — mastering focal distance, feed rate, and material ventilation ensures clean edges and sharp engraving without burn damage."
+        : "Additive manufacturing turns geometry into physical form layer by layer — understanding slicer infill, filament thermal profiles, and print bed leveling determines dimensional accuracy and structural strength.")
+    : week?.lesson
 
   return (
     <Dialog open={weekNumber !== null} onOpenChange={(open) => { if (!open) onChange(null) }}>
       <DialogContent ref={scrollRef} className="max-h-[90dvh] overflow-y-auto p-6 sm:max-w-3xl md:p-8">
         {week && <>
           <DialogHeader className="pr-6"><div className="flex flex-wrap items-center gap-3 pb-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">Week {String(week.number).padStart(2, '0')} / 19</span><Badge variant="outline">{week.phase}</Badge></div><DialogTitle>{week.title}</DialogTitle><DialogDescription>{week.summary}</DialogDescription></DialogHeader>
+          {isWeek6 && (
+            <div className="mt-4 flex flex-col gap-2.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Select Fabrication Track</span>
+                <span className="font-mono text-xs text-primary">{fabricationTab === 'laser' ? 'Subtractive Manufacturing' : 'Additive Manufacturing'}</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 rounded-xl border border-border bg-muted/40 p-1.5 shadow-inner">
+                <button
+                  type="button"
+                  onClick={() => { setFabricationTab('laser'); scrollRef.current?.scrollTo({ top: 0 }) }}
+                  className={`flex items-center justify-center gap-2.5 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                    fabricationTab === 'laser'
+                      ? 'bg-card text-foreground shadow-sm border border-border/80 ring-1 ring-primary/40'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  <Zap className={`size-4 ${fabricationTab === 'laser' ? 'text-primary' : ''}`} />
+                  <span className="flex flex-col items-start text-left sm:flex-row sm:items-center sm:gap-2">
+                    <span className="font-semibold">Laser Cutting</span>
+                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">4 Media</span>
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setFabricationTab('3d'); scrollRef.current?.scrollTo({ top: 0 }) }}
+                  className={`flex items-center justify-center gap-2.5 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                    fabricationTab === '3d'
+                      ? 'bg-card text-foreground shadow-sm border border-border/80 ring-1 ring-primary/40'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  }`}
+                >
+                  <Printer className={`size-4 ${fabricationTab === '3d' ? 'text-primary' : ''}`} />
+                  <span className="flex flex-col items-start text-left sm:flex-row sm:items-center sm:gap-2">
+                    <span className="font-semibold">3D Printing</span>
+                    <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">3 Media</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          )}
           {!isWeek6 && gallery.length > 0 && (
             <div className="flex flex-col gap-3 pt-3">
             {isVideo ? (
@@ -251,7 +315,47 @@ export function WeekReader({ weekNumber, onChange }: { weekNumber: number | null
             <p className="text-sm text-muted-foreground">{week.gallery ? `Week ${week.number} documentation gallery (${gallery.length} ${hasVideo ? 'photos & videos' : 'photos'})` : `Illustrative concept gallery · Replace with your Week ${week.number} photographs.`}</p>
           </div>
         )}
-          <div className="reading-copy py-5"><h3>This week&apos;s focus</h3><ul className="flex flex-wrap gap-x-5 gap-y-3">{week.focus.map((focus) => <li key={focus} className="flex items-center gap-2 text-sm text-muted-foreground"><Check className="size-4 text-primary" />{focus}</li>)}</ul><h3>Inside the process</h3>{week.story.map((paragraph, index) => renderStoryParagraph(paragraph, index))}<div className="flex items-start gap-4 rounded-xl border border-primary/20 bg-primary/5 p-5 text-foreground"><Lightbulb className="mt-1 size-5 shrink-0 text-primary" /><div className="flex flex-col gap-2"><span className="font-mono text-sm uppercase tracking-wider text-primary">The takeaway</span><p>{week.lesson}</p></div></div></div>
+          <div className="reading-copy py-5">
+            <h3>{isWeek6 ? (fabricationTab === 'laser' ? 'Laser cutting focus' : '3D printing focus') : "This week's focus"}</h3>
+            <ul className="flex flex-wrap gap-x-5 gap-y-3">
+              {displayedFocus.map((focus) => (
+                <li key={focus} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Check className="size-4 text-primary" />{focus}
+                </li>
+              ))}
+            </ul>
+            <h3>Inside the process</h3>
+            {displayedStory.map((paragraph, index) => renderStoryParagraph(paragraph, index))}
+            {isWeek6 && (
+              <div className="my-6 flex flex-col gap-3 rounded-xl border border-border/80 bg-card/60 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-xs text-muted-foreground">Next fabrication track</span>
+                  <span className="text-sm font-medium text-foreground">
+                    {fabricationTab === 'laser' ? 'Ready to explore 3D printing & H2S specifications?' : 'Want to revisit laser cutting & vector engraving?'}
+                  </span>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setFabricationTab(fabricationTab === 'laser' ? '3d' : 'laser')
+                    scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+                  }}
+                  className="gap-2 self-start sm:self-auto"
+                >
+                  {fabricationTab === 'laser' ? <Printer className="size-3.5 text-primary" /> : <Zap className="size-3.5 text-primary" />}
+                  <span>{fabricationTab === 'laser' ? 'Switch to 3D Printing' : 'Switch to Laser Cutting'}</span>
+                </Button>
+              </div>
+            )}
+            <div className="flex items-start gap-4 rounded-xl border border-primary/20 bg-primary/5 p-5 text-foreground">
+              <Lightbulb className="mt-1 size-5 shrink-0 text-primary" />
+              <div className="flex flex-col gap-2">
+                <span className="font-mono text-sm uppercase tracking-wider text-primary">The takeaway</span>
+                <p>{displayedLesson}</p>
+              </div>
+            </div>
+          </div>
           <div className="flex items-center justify-between border-t border-border pt-4"><Button variant="outline" disabled={week.number === 0} onClick={() => onChange(week.number - 1)}><ArrowLeft data-icon="inline-start" />Previous week</Button><Button variant="outline" disabled={week.number === 19} onClick={() => onChange(week.number + 1)}>Next week<ArrowRight data-icon="inline-end" /></Button></div>
         </>}
       </DialogContent>
